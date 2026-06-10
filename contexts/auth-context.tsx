@@ -9,6 +9,7 @@ interface User {
     name: string;
     role: string;
     status: string;
+    profilePicture?: string | null;
 }
 
 interface AuthContextType {
@@ -20,6 +21,8 @@ interface AuthContextType {
     signIn: (email: string, password: string) => Promise<void>;
     signOut: () => Promise<void>;
     refreshAuthToken: () => Promise<void>;
+    updateUser: (updatedUserData: Partial<User>) => void;
+    refreshUserData: () => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -30,16 +33,51 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const [refreshToken, setRefreshToken] = useState<string | null>(null);
     const [isLoading, setIsLoading] = useState(true);
 
+    const refreshUserData = async () => {
+        if (!accessToken) return;
+
+        try {
+            const profile = await apiClient.getProfile(accessToken);
+            if (profile) {
+                const updatedUser = {
+                    id: profile.id,
+                    email: profile.email,
+                    name: profile.name,
+                    role: profile.role,
+                    status: profile.status,
+                    profilePicture: profile.profilePicture || null,
+                };
+                setUser(updatedUser);
+                localStorage.setItem('user', JSON.stringify(updatedUser));
+                console.log('🔄 Refreshed user data, profile picture:', updatedUser.profilePicture);
+            }
+        } catch (error) {
+            console.error('Failed to refresh user data:', error);
+        }
+    };
+
     // Load tokens from localStorage on mount
     useEffect(() => {
         const storedAccessToken = localStorage.getItem('accessToken');
         const storedRefreshToken = localStorage.getItem('refreshToken');
         const storedUser = localStorage.getItem('user');
 
-        if (storedAccessToken && storedRefreshToken && storedUser) {
+        if (storedAccessToken && storedRefreshToken) {
             setAccessToken(storedAccessToken);
             setRefreshToken(storedRefreshToken);
-            setUser(JSON.parse(storedUser));
+
+            if (storedUser) {
+                try {
+                    const parsedUser = JSON.parse(storedUser);
+                    setUser(parsedUser);
+                    console.log('✅ Loaded user from storage:', parsedUser);
+                } catch (error) {
+                    console.error('Failed to parse stored user:', error);
+                }
+            }
+
+            // Refresh user data from server
+            refreshUserData();
         }
         setIsLoading(false);
     }, []);
@@ -50,10 +88,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
             localStorage.setItem('accessToken', accessToken);
             localStorage.setItem('refreshToken', refreshToken);
             localStorage.setItem('user', JSON.stringify(user));
-        } else {
-            localStorage.removeItem('accessToken');
-            localStorage.removeItem('refreshToken');
-            localStorage.removeItem('user');
+            console.log('💾 Saved user to storage:', user);
         }
     }, [accessToken, refreshToken, user]);
 
@@ -62,13 +97,17 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         try {
             const response = await apiClient.register({ email, name, password });
 
-            // Store tokens and user data
             setAccessToken(response.accessToken);
             setRefreshToken(response.refreshToken);
-            setUser(response.user);
-
-            // Note: After signup, email verification is required
-            // User will have status: 'pending_verification'
+            const userData = {
+                id: response.user.id,
+                email: response.user.email,
+                name: response.user.name,
+                role: response.user.role,
+                status: response.user.status,
+                profilePicture: response.user.profilePicture || null,
+            };
+            setUser(userData);
         } catch (error) {
             console.error('Signup error:', error);
             throw error;
@@ -82,9 +121,20 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         try {
             const response = await apiClient.login({ email, password });
 
+            console.log('🔐 Login response user:', response.user);
+
             setAccessToken(response.accessToken);
             setRefreshToken(response.refreshToken);
-            setUser(response.user);
+
+            const userData = {
+                id: response.user.id,
+                email: response.user.email,
+                name: response.user.name,
+                role: response.user.role,
+                status: response.user.status,
+                profilePicture: response.user.profilePicture || null,
+            };
+            setUser(userData);
         } catch (error) {
             console.error('Login error:', error);
             throw error;
@@ -113,9 +163,19 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         try {
             const response = await apiClient.refreshToken(refreshToken);
             setAccessToken(response.accessToken);
+            await refreshUserData();
         } catch (error) {
             console.error('Token refresh error:', error);
             await signOut();
+        }
+    };
+
+    const updateUser = (updatedUserData: Partial<User>) => {
+        if (user) {
+            const newUser = { ...user, ...updatedUserData };
+            setUser(newUser);
+            localStorage.setItem('user', JSON.stringify(newUser));
+            console.log('🔄 Updated user:', newUser);
         }
     };
 
@@ -130,6 +190,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
                 signIn,
                 signOut,
                 refreshAuthToken,
+                updateUser,
+                refreshUserData,
             }}
         >
             {children}

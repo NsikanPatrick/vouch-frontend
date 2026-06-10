@@ -18,6 +18,7 @@ export interface AuthResponse {
         name: string;
         role: string;
         status: string;
+        profilePicture?: string | null;
     };
     accessToken: string;
     refreshToken: string;

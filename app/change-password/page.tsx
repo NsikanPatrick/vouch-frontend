@@ -1,5 +1,6 @@
 'use client';
 
+import Link from "next/link";
 import { ProtectedRoute } from "@/components/page/protected-route";
 import { useAuth } from "@/contexts/auth-context";
 import { Button } from "@/components/ui/button";
@@ -85,9 +86,9 @@ function ChangePasswordContent() {
         <div className="min-h-screen bg-background">
             <header className="border-b">
                 <div className="container mx-auto flex h-16 items-center px-4">
-                    <a href="/dashboard" className="text-xl font-bold">
+                    <Link href="/dashboard" className="text-xl font-bold">
                         ← Back to Dashboard
-                    </a>
+                    </Link>
                 </div>
             </header>
 

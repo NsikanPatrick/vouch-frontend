@@ -1,5 +1,6 @@
 'use client';
 
+import Link from "next/link"; // ✅ Import Link
 import { ProtectedRoute } from "@/components/page/protected-route";
 import { useAuth } from "@/contexts/auth-context";
 import { Button } from "@/components/ui/button";
@@ -10,6 +11,7 @@ import {
     CardHeader,
     CardTitle,
 } from "@/components/ui/card";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useRouter } from "next/navigation";
 
 function DashboardContent() {
@@ -38,9 +40,23 @@ function DashboardContent() {
                 <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
                     {/* User Profile Card */}
                     <Card>
-                        <CardHeader>
-                            <CardTitle>Profile</CardTitle>
-                            <CardDescription>Your account information</CardDescription>
+                        <CardHeader className="flex flex-row items-center gap-4">
+                            <Avatar className="h-16 w-16">
+                                <AvatarImage
+                                    src={user?.profilePicture || undefined}
+                                    alt={user?.name}
+                                    onError={(e) => {
+                                        (e.target as HTMLImageElement).style.display = 'none';
+                                    }}
+                                />
+                                <AvatarFallback className="text-lg">
+                                    {user?.name?.split(" ").map(n => n[0]).join("").toUpperCase().slice(0, 2) || "U"}
+                                </AvatarFallback>
+                            </Avatar>
+                            <div>
+                                <CardTitle>Profile</CardTitle>
+                                <CardDescription>Your account information</CardDescription>
+                            </div>
                         </CardHeader>
                         <CardContent className="space-y-2">
                             <div>
@@ -59,6 +75,10 @@ function DashboardContent() {
                                 <p className="text-sm font-medium text-muted-foreground">Account Status</p>
                                 <p className="text-lg capitalize">{user?.status}</p>
                             </div>
+                            {/* ✅ Use Link instead of anchor tag */}
+                            <Button variant="outline" className="w-full mt-4" asChild>
+                                <Link href="/profile">Edit Profile</Link>
+                            </Button>
                         </CardContent>
                     </Card>
 
@@ -93,14 +113,14 @@ function DashboardContent() {
                         </CardHeader>
                         <CardContent className="space-y-2">
                             <Button variant="outline" className="w-full" asChild>
-                                <a href="/profile">Edit Profile</a>
+                                <Link href="/profile">Edit Profile</Link>
                             </Button>
                             <Button variant="outline" className="w-full" asChild>
-                                <a href="/change-password">Change Password</a>
+                                <Link href="/change-password">Change Password</Link>
                             </Button>
                             {user?.role === 'admin' && (
                                 <Button variant="outline" className="w-full" asChild>
-                                    <a href="/admin">Admin Panel</a>
+                                    <Link href="/admin">Admin Panel</Link>
                                 </Button>
                             )}
                         </CardContent>
