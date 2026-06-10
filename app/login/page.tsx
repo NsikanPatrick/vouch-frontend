@@ -8,6 +8,7 @@ import {
     CardHeader,
     CardTitle,
 } from "@/components/ui/card";
+import { Mail, Lock, Eye, EyeOff, Loader2, Shield } from 'lucide-react';
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Link from "next/link";
@@ -89,6 +90,25 @@ export default function LoginPage() {
                         )}
                         <Button type="submit" className="w-full" disabled={isLoading}>
                             {isLoading ? "Signing you in..." : "Sign In"}
+                        </Button>
+                        
+
+                        <div className="relative my-4">
+                            <div className="absolute inset-0 flex items-center">
+                                <span className="w-full border-t" />
+                            </div>
+                            <div className="relative flex justify-center text-xs uppercase">
+                                <span className="bg-background px-2 text-muted-foreground">
+                                    Or continue with
+                                </span>
+                            </div>
+                        </div>
+
+                        <Button variant="outline" className="w-full" asChild>
+                            <Link href="/otp/request">
+                                <Shield className="mr-2 h-4 w-4" />
+                                Sign in with Magic Code
+                            </Link>
                         </Button>
                     </form>
                 </CardContent>
