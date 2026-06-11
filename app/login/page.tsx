@@ -9,6 +9,7 @@ import {
     CardTitle,
 } from "@/components/ui/card";
 import { Mail, Lock, Eye, EyeOff, Loader2, Shield } from 'lucide-react';
+import {FaGoogle} from 'react-icons/fa'
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Link from "next/link";
@@ -22,6 +23,7 @@ export default function LoginPage() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
+    const [isGoogleLoading, setIsGoogleLoading] = useState(false);
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -43,6 +45,12 @@ export default function LoginPage() {
         } catch (err: any) {
             setError(err.message || "Invalid email or password");
         }
+    };
+
+    const handleGoogleLogin = () => {
+        setIsGoogleLoading(true);
+        // Redirect to backend Google OAuth endpoint
+        window.location.href = `${process.env.NEXT_PUBLIC_API_URL}/auth/google`;
     };
 
     return (
@@ -91,7 +99,6 @@ export default function LoginPage() {
                         <Button type="submit" className="w-full" disabled={isLoading}>
                             {isLoading ? "Signing you in..." : "Sign In"}
                         </Button>
-                        
 
                         <div className="relative my-4">
                             <div className="absolute inset-0 flex items-center">
@@ -104,6 +111,22 @@ export default function LoginPage() {
                             </div>
                         </div>
 
+                        {/* Google Login Button */}
+                        <Button
+                            variant="outline"
+                            className="w-full"
+                            onClick={handleGoogleLogin}
+                            disabled={isGoogleLoading}
+                        >
+                            {isGoogleLoading ? (
+                                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                            ) : (
+                                    <FaGoogle className="mr-2 h-4 w-4" />
+                            )}
+                            {isGoogleLoading ? "Redirecting..." : "Continue with Google"}
+                        </Button>
+
+                        {/* Magic Code Login Button */}
                         <Button variant="outline" className="w-full" asChild>
                             <Link href="/otp/request">
                                 <Shield className="mr-2 h-4 w-4" />
