@@ -25,7 +25,7 @@ export default function LoginPage() {
     const [error, setError] = useState("");
     const [isGoogleLoading, setIsGoogleLoading] = useState(false);
 
-    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e: React.SubmitEvent<HTMLFormElement>) => {
         e.preventDefault();
         setError("");
 
@@ -38,6 +38,12 @@ export default function LoginPage() {
             setError("Password is required");
             return;
         }
+
+        // ✅ Clear any existing session data before new login
+        localStorage.removeItem('accessToken');
+        localStorage.removeItem('refreshToken');
+        localStorage.removeItem('user');
+        sessionStorage.removeItem('otpEmail');
 
         try {
             await signIn(email, password);

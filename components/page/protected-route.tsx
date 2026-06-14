@@ -10,21 +10,17 @@ export function ProtectedRoute({ children }: { children: React.ReactNode }) {
     const [isChecking, setIsChecking] = useState(true);
 
     useEffect(() => {
-        console.log('ProtectedRoute - isLoading:', isLoading);
-        console.log('ProtectedRoute - user:', user);
-
         const checkAuth = () => {
-            // If not loading and no user, check localStorage directly
             if (!isLoading) {
                 if (!user) {
                     const storedUser = localStorage.getItem('user');
                     const storedToken = localStorage.getItem('accessToken');
 
-                    console.log('ProtectedRoute - storedUser:', !!storedUser);
-                    console.log('ProtectedRoute - storedToken:', !!storedToken);
-
                     if (!storedUser || !storedToken) {
-                        console.log('ProtectedRoute - No user, redirecting to login');
+                        // Clear any partial data
+                        localStorage.removeItem('accessToken');
+                        localStorage.removeItem('refreshToken');
+                        localStorage.removeItem('user');
                         router.push("/login");
                     }
                 }

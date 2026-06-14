@@ -14,18 +14,23 @@ function OAuthRedirectContent() {
         const refreshToken = searchParams.get('refresh');
         const userParam = searchParams.get('user');
 
+        // ✅ Clear any existing session data before new login
+        localStorage.removeItem('accessToken');
+        localStorage.removeItem('refreshToken');
+        localStorage.removeItem('user');
+        sessionStorage.removeItem('otpEmail');
+
         if (token && refreshToken) {
             // Store tokens
             localStorage.setItem('accessToken', token);
             localStorage.setItem('refreshToken', refreshToken);
 
-            // If user data is passed in URL, use it directly
             if (userParam) {
                 try {
                     const user = JSON.parse(decodeURIComponent(userParam));
                     if (user && user.id) {
                         localStorage.setItem('user', JSON.stringify(user));
-                        router.push('/dashboard');
+                        window.location.href = '/dashboard';
                         return;
                     }
                 } catch (e) {
@@ -33,7 +38,7 @@ function OAuthRedirectContent() {
                 }
             }
 
-            // ✅ Fallback: Fetch user profile if not passed in URL
+            // Fallback: Fetch user profile
             fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/profile`, {
                 headers: { 'Authorization': `Bearer ${token}` },
             })
@@ -41,17 +46,17 @@ function OAuthRedirectContent() {
                 .then(user => {
                     if (user && user.id) {
                         localStorage.setItem('user', JSON.stringify(user));
-                        router.push('/dashboard');
+                        window.location.href = '/dashboard';
                     } else {
-                        router.push('/login?error=Failed to fetch user profile');
+                        window.location.href = '/login?error=Failed to fetch user profile';
                     }
                 })
                 .catch((err) => {
                     console.error('Profile fetch error:', err);
-                    router.push('/login?error=Google sign-in failed');
+                    window.location.href = '/login?error=Google sign-in failed';
                 });
         } else {
-            router.push('/login?error=Invalid OAuth response');
+            window.location.href = '/login?error=Invalid OAuth response';
         }
     }, [router, searchParams]);
 

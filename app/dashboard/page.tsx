@@ -44,9 +44,23 @@ function DashboardContent() {
         }
     }, [isLoading, user, router]);
 
+    // const handleLogout = async () => {
+    //     await signOut();
+    //     router.push("/login");
+    // };
     const handleLogout = async () => {
+        console.log('🚪 Logging out...');
+
+        // Clear everything immediately for responsive UI
+        localStorage.removeItem('accessToken');
+        localStorage.removeItem('refreshToken');
+        localStorage.removeItem('user');
+        sessionStorage.removeItem('otpEmail');
+
         await signOut();
-        router.push("/login");
+
+        // Force a hard navigation to login page
+        window.location.href = '/login';
     };
 
     return (

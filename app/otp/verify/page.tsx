@@ -64,7 +64,7 @@ export default function OtpVerifyPage() {
         }
     };
 
-    const handleSubmit = async (e: React.SubmitEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setError('');
         setIsLoading(true);
@@ -77,6 +77,12 @@ export default function OtpVerifyPage() {
         }
 
         try {
+            // ✅ Clear any existing session data before new login
+            localStorage.removeItem('accessToken');
+            localStorage.removeItem('refreshToken');
+            localStorage.removeItem('user');
+            sessionStorage.removeItem('otpEmail');
+
             const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/otp/verify`, {
                 method: 'POST',
                 headers: {
@@ -88,30 +94,17 @@ export default function OtpVerifyPage() {
             const data = await response.json();
 
             if (response.ok && data.accessToken && data.user) {
-                // ✅ Clear any existing data first
-                localStorage.clear();
-
-                // Store tokens and user data
+                // Store new tokens
                 localStorage.setItem('accessToken', data.accessToken);
                 localStorage.setItem('refreshToken', data.refreshToken);
                 localStorage.setItem('user', JSON.stringify(data.user));
 
-                console.log('✅ Stored user data:', data.user);
-                console.log('✅ Stored access token:', data.accessToken.substring(0, 20) + '...');
+                console.log('✅ New session stored for user:', data.user.email);
 
-                // ✅ Verify storage was successful
-                const verifyUser = localStorage.getItem('user');
-                console.log('✅ Verification - User in storage:', verifyUser ? 'YES' : 'NO');
-
-                // Clear stored email
                 sessionStorage.removeItem('otpEmail');
 
-                // Add a small delay to ensure storage is written before navigation
-                setTimeout(() => {
-                    // Use window.location.replace instead of router.push to force a full page reload
-                    // This ensures the auth context re-initializes with the new data
-                    window.location.href = '/dashboard';
-                }, 500);
+                // Force a full page reload to ensure clean state
+                window.location.href = '/dashboard';
             } else {
                 setError(data.message || 'Invalid or expired verification code');
                 setCode(['', '', '', '', '', '']);

@@ -186,18 +186,67 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         }
     };
 
-    const signOut = async () => {
-        if (refreshToken) {
-            try {
-                await apiClient.logout(refreshToken);
-            } catch (error) {
-                console.error('Logout error:', error);
-            }
-        }
+    // const signOut = async () => {
+    //     if (refreshToken) {
+    //         try {
+    //             await apiClient.logout(refreshToken);
+    //         } catch (error) {
+    //             console.error('Logout error:', error);
+    //         }
+    //     }
 
-        setAccessToken(null);
-        setRefreshToken(null);
-        setUser(null);
+    //     setAccessToken(null);
+    //     setRefreshToken(null);
+    //     setUser(null);
+    // };
+
+    const signOut = async () => {
+        setIsLoading(true);
+
+        try {
+            // 1. Revoke the refresh token on the backend if it exists
+            const currentRefreshToken = localStorage.getItem('refreshToken');
+            if (currentRefreshToken) {
+                try {
+                    await apiClient.logout(currentRefreshToken);
+                    console.log('✅ Token revoked on backend');
+                } catch (error) {
+                    console.error('Logout API error:', error);
+                    // Continue with local cleanup even if API fails
+                }
+            }
+
+            // 2. Clear all authentication data from localStorage
+            localStorage.removeItem('accessToken');
+            localStorage.removeItem('refreshToken');
+            localStorage.removeItem('user');
+
+            // 3. Clear sessionStorage if you're using it
+            sessionStorage.removeItem('otpEmail');
+
+            // 4. Clear any other app-specific storage
+            // Add any other keys you might have stored
+            // localStorage.removeItem('someOtherKey');
+
+            // 5. Clear React state
+            setAccessToken(null);
+            setRefreshToken(null);
+            setUser(null);
+
+            console.log('✅ All auth data cleared from storage');
+
+        } catch (error) {
+            console.error('Logout error:', error);
+            // Still clear local data even if API fails
+            localStorage.removeItem('accessToken');
+            localStorage.removeItem('refreshToken');
+            localStorage.removeItem('user');
+            setAccessToken(null);
+            setRefreshToken(null);
+            setUser(null);
+        } finally {
+            setIsLoading(false);
+        }
     };
 
     const refreshAuthToken = async () => {
