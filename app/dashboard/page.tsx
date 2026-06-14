@@ -1,6 +1,7 @@
 'use client';
 
-import Link from "next/link"; // ✅ Import Link
+import Link from "next/link"; 
+import { useEffect } from "react";
 import { ProtectedRoute } from "@/components/page/protected-route";
 import { useAuth } from "@/contexts/auth-context";
 import { Button } from "@/components/ui/button";
@@ -15,12 +16,33 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useRouter } from "next/navigation";
 
 function DashboardContent() {
-    const { user, signOut } = useAuth();
+    const { user, signOut, isLoading } = useAuth();
     const router = useRouter();
 
     // Debug log
     console.log('Dashboard - User:', user);
     console.log('Dashboard - AccessToken:', localStorage.getItem('accessToken'));
+    
+    useEffect(() => {
+        console.log('Dashboard - isLoading:', isLoading);
+        console.log('Dashboard - user:', user);
+
+        // FALLBACK: If not loading and no user, try to reload from localStorage
+        if (!isLoading && !user) {
+            const storedUser = localStorage.getItem('user');
+            const storedToken = localStorage.getItem('accessToken');
+
+            console.log('Dashboard - storedUser:', !!storedUser);
+            console.log('Dashboard - storedToken:', !!storedToken);
+
+            if (storedUser && storedToken) {
+                console.log('Dashboard - Found stored data, reloading...');
+                window.location.reload();
+            } else {
+                router.push('/login');
+            }
+        }
+    }, [isLoading, user, router]);
 
     const handleLogout = async () => {
         await signOut();

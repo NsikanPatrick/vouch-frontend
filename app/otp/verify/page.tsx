@@ -77,8 +77,6 @@ export default function OtpVerifyPage() {
         }
 
         try {
-            console.log('📡 Sending OTP verification for:', email);
-
             const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/otp/verify`, {
                 method: 'POST',
                 headers: {
@@ -88,39 +86,39 @@ export default function OtpVerifyPage() {
             });
 
             const data = await response.json();
-            console.log('📡 OTP Response:', data);
 
-            if (response.ok) {
-                // ✅ Check if user data is present
-                if (!data.user) {
-                    console.error('❌ No user data in response:', data);
-                    setError('Login failed: No user data received');
-                    setIsLoading(false);
-                    return;
-                }
+            if (response.ok && data.accessToken && data.user) {
+                // ✅ Clear any existing data first
+                localStorage.clear();
 
-                console.log('✅ Storing user data:', data.user);
-
-                // Store tokens
+                // Store tokens and user data
                 localStorage.setItem('accessToken', data.accessToken);
                 localStorage.setItem('refreshToken', data.refreshToken);
                 localStorage.setItem('user', JSON.stringify(data.user));
 
+                console.log('✅ Stored user data:', data.user);
+                console.log('✅ Stored access token:', data.accessToken.substring(0, 20) + '...');
+
+                // ✅ Verify storage was successful
+                const verifyUser = localStorage.getItem('user');
+                console.log('✅ Verification - User in storage:', verifyUser ? 'YES' : 'NO');
+
                 // Clear stored email
                 sessionStorage.removeItem('otpEmail');
 
-                // Redirect to dashboard
-                console.log('🚀 Redirecting to dashboard...');
-                router.push('/dashboard');
+                // Add a small delay to ensure storage is written before navigation
+                setTimeout(() => {
+                    // Use window.location.replace instead of router.push to force a full page reload
+                    // This ensures the auth context re-initializes with the new data
+                    window.location.href = '/dashboard';
+                }, 500);
             } else {
-                console.error('❌ OTP verification failed:', data);
                 setError(data.message || 'Invalid or expired verification code');
-                // Clear all inputs on error
                 setCode(['', '', '', '', '', '']);
                 inputRefs.current[0]?.focus();
             }
         } catch (err) {
-            console.error('❌ Network error:', err);
+            console.error('Network error:', err);
             setError('Network error. Please try again.');
         } finally {
             setIsLoading(false);

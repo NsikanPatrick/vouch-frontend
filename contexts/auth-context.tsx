@@ -33,6 +33,49 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const [refreshToken, setRefreshToken] = useState<string | null>(null);
     const [isLoading, setIsLoading] = useState(true);
 
+    // Function to load user data from localStorage
+    const loadUserFromStorage = () => {
+        const storedAccessToken = localStorage.getItem('accessToken');
+        const storedRefreshToken = localStorage.getItem('refreshToken');
+        const storedUser = localStorage.getItem('user');
+
+        console.log('🔄 Loading from storage - AccessToken:', !!storedAccessToken);
+        console.log('🔄 Loading from storage - User:', !!storedUser);
+
+        if (storedAccessToken && storedRefreshToken && storedUser) {
+            try {
+                const parsedUser = JSON.parse(storedUser);
+                setAccessToken(storedAccessToken);
+                setRefreshToken(storedRefreshToken);
+                setUser(parsedUser);
+                console.log('✅ Loaded user from storage:', parsedUser);
+                return true;
+            } catch (error) {
+                console.error('Failed to parse stored user:', error);
+            }
+        }
+        return false;
+    };
+
+    // Load tokens from localStorage on mount
+    useEffect(() => {
+        loadUserFromStorage();
+        setIsLoading(false);
+    }, []);
+
+    // Listen for storage events (triggered when localStorage changes in another tab/window)
+    useEffect(() => {
+        const handleStorageChange = (e: StorageEvent) => {
+            if (e.key === 'user' || e.key === 'accessToken' || e.key === 'refreshToken') {
+                console.log('🔄 Storage changed, reloading user data...');
+                loadUserFromStorage();
+            }
+        };
+
+        window.addEventListener('storage', handleStorageChange);
+        return () => window.removeEventListener('storage', handleStorageChange);
+    }, []);
+
     const refreshUserData = async () => {
         if (!accessToken) return;
 
