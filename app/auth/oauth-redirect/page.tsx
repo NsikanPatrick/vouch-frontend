@@ -19,7 +19,7 @@ function OAuthRedirectContent() {
             localStorage.setItem('accessToken', token);
             localStorage.setItem('refreshToken', refreshToken);
 
-            // ✅ If user data is passed in URL, use it directly
+            // If user data is passed in URL, use it directly
             if (userParam) {
                 try {
                     const user = JSON.parse(decodeURIComponent(userParam));

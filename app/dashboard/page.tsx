@@ -18,6 +18,10 @@ function DashboardContent() {
     const { user, signOut } = useAuth();
     const router = useRouter();
 
+    // Debug log
+    console.log('Dashboard - User:', user);
+    console.log('Dashboard - AccessToken:', localStorage.getItem('accessToken'));
+
     const handleLogout = async () => {
         await signOut();
         router.push("/login");

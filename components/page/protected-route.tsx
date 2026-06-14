@@ -9,7 +9,11 @@ export function ProtectedRoute({ children }: { children: React.ReactNode }) {
     const router = useRouter();
 
     useEffect(() => {
+        console.log('ProtectedRoute - isLoading:', isLoading);
+        console.log('ProtectedRoute - user:', user);
+        
         if (!isLoading && !user) {
+            console.log('ProtectedRoute - No user, redirecting to login');
             router.push("/login");
         }
     }, [isLoading, user, router]);

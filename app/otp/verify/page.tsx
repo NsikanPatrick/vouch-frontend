@@ -64,7 +64,7 @@ export default function OtpVerifyPage() {
         }
     };
 
-    const handleSubmit = async (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.SubmitEvent) => {
         e.preventDefault();
         setError('');
         setIsLoading(true);
@@ -77,6 +77,8 @@ export default function OtpVerifyPage() {
         }
 
         try {
+            console.log('📡 Sending OTP verification for:', email);
+
             const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/otp/verify`, {
                 method: 'POST',
                 headers: {
@@ -86,8 +88,19 @@ export default function OtpVerifyPage() {
             });
 
             const data = await response.json();
+            console.log('📡 OTP Response:', data);
 
             if (response.ok) {
+                // ✅ Check if user data is present
+                if (!data.user) {
+                    console.error('❌ No user data in response:', data);
+                    setError('Login failed: No user data received');
+                    setIsLoading(false);
+                    return;
+                }
+
+                console.log('✅ Storing user data:', data.user);
+
                 // Store tokens
                 localStorage.setItem('accessToken', data.accessToken);
                 localStorage.setItem('refreshToken', data.refreshToken);
@@ -97,14 +110,17 @@ export default function OtpVerifyPage() {
                 sessionStorage.removeItem('otpEmail');
 
                 // Redirect to dashboard
+                console.log('🚀 Redirecting to dashboard...');
                 router.push('/dashboard');
             } else {
+                console.error('❌ OTP verification failed:', data);
                 setError(data.message || 'Invalid or expired verification code');
                 // Clear all inputs on error
                 setCode(['', '', '', '', '', '']);
                 inputRefs.current[0]?.focus();
             }
         } catch (err) {
+            console.error('❌ Network error:', err);
             setError('Network error. Please try again.');
         } finally {
             setIsLoading(false);
