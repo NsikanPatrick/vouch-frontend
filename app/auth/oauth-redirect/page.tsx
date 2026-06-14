@@ -12,13 +12,28 @@ function OAuthRedirectContent() {
     useEffect(() => {
         const token = searchParams.get('token');
         const refreshToken = searchParams.get('refresh');
+        const userParam = searchParams.get('user');
 
         if (token && refreshToken) {
             // Store tokens
             localStorage.setItem('accessToken', token);
             localStorage.setItem('refreshToken', refreshToken);
 
-            // Fetch user profile
+            // ✅ If user data is passed in URL, use it directly
+            if (userParam) {
+                try {
+                    const user = JSON.parse(decodeURIComponent(userParam));
+                    if (user && user.id) {
+                        localStorage.setItem('user', JSON.stringify(user));
+                        router.push('/dashboard');
+                        return;
+                    }
+                } catch (e) {
+                    console.error('Failed to parse user data:', e);
+                }
+            }
+
+            // ✅ Fallback: Fetch user profile if not passed in URL
             fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/profile`, {
                 headers: { 'Authorization': `Bearer ${token}` },
             })
@@ -31,7 +46,8 @@ function OAuthRedirectContent() {
                         router.push('/login?error=Failed to fetch user profile');
                     }
                 })
-                .catch(() => {
+                .catch((err) => {
+                    console.error('Profile fetch error:', err);
                     router.push('/login?error=Google sign-in failed');
                 });
         } else {
