@@ -102,7 +102,7 @@ export default function LoginPage() {
                                 {error}
                             </div>
                         )}
-                        <Button type="submit" className="w-full" disabled={isLoading}>
+                        <Button type="submit" className="w-full bg-blue-950 hover:bg-blue-900" disabled={isLoading}>
                             {isLoading ? "Signing you in..." : "Sign In"}
                         </Button>
 
