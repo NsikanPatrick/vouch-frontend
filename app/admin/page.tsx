@@ -3,6 +3,8 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { ProtectedRoute } from '@/components/page/protected-route';
+import { EmailLogsTable } from './email-logs-table';
+import { EmailStatsDashboard } from './email-stats-dashboard';
 import { useAuth } from '@/contexts/auth-context';
 import { Button } from '@/components/ui/button';
 import {
@@ -50,7 +52,9 @@ import {
     Pencil,
     ShieldCheck,
     UserCog,
-    ArrowUpDown
+    ArrowUpDown,
+    BarChart3,
+    Mail
 } from 'lucide-react';
 import { apiClient } from '@/lib/api-client';
 
@@ -93,12 +97,69 @@ function AdminContent() {
     const [adminError, setAdminError] = useState('');
     const [adminSuccess, setAdminSuccess] = useState('');
 
+    // Email state variables
+    const [emailStats, setEmailStats] = useState<any>(null);
+    const [emailLogs, setEmailLogs] = useState<any[]>([]);
+    const [isLoadingEmails, setIsLoadingEmails] = useState(false);
+    const [emailLogsPage, setEmailLogsPage] = useState(1);
+    const [emailLogsTotal, setEmailLogsTotal] = useState(0);
+    const [emailLogsTotalPages, setEmailLogsTotalPages] = useState(1);
+    const [selectedDateRange, setSelectedDateRange] = useState<'week' | 'month' | 'all'>('week');
+
     // Check if current user is admin
     useEffect(() => {
         if (user && user.role !== 'admin') {
             router.push('/dashboard');
         }
     }, [user, router]);
+
+    // useEffect to load email data when tab changes
+    useEffect(() => {
+        fetchEmailStats();
+        fetchEmailLogs();
+    }, []);
+
+    // Email logs and stats related functions
+    const fetchEmailStats = async () => {
+        setIsLoadingEmails(true);
+        try {
+            let url = '/admin/emails/stats';
+
+            // Add date range if needed
+            if (selectedDateRange !== 'all') {
+                const endDate = new Date();
+                const startDate = new Date();
+                if (selectedDateRange === 'week') {
+                    startDate.setDate(startDate.getDate() - 7);
+                } else if (selectedDateRange === 'month') {
+                    startDate.setMonth(startDate.getMonth() - 1);
+                }
+                url += `?startDate=${startDate.toISOString()}&endDate=${endDate.toISOString()}`;
+            }
+
+            const response = await apiClient.getEmailStats(url);
+            setEmailStats(response);
+        } catch (error) {
+            console.error('Failed to fetch email stats:', error);
+        } finally {
+            setIsLoadingEmails(false);
+        }
+    };
+
+    const fetchEmailLogs = async (page: number = 1) => {
+        setIsLoadingEmails(true);
+        try {
+            const response = await apiClient.getEmailLogs(page, 20);
+            setEmailLogs(response.logs);
+            setEmailLogsTotal(response.pagination.total);
+            setEmailLogsTotalPages(response.pagination.totalPages);
+        } catch (error) {
+            console.error('Failed to fetch email logs:', error);
+        } finally {
+            setIsLoadingEmails(false);
+        }
+    };
+    // End of email logs and stats related functions
 
     // Fetch all users
     const fetchUsers = async () => {
@@ -318,14 +379,23 @@ function AdminContent() {
             <main className="container mx-auto p-4">
                 <Tabs defaultValue="users" className="space-y-4">
                     <TabsList>
-                        <TabsTrigger value="users" className="flex items-center gap-2">
+                        <TabsTrigger value="users" className="flex items-center gap-2 border border-gray-300">
                             <Users className="h-4 w-4" />
                             All Users
                         </TabsTrigger>
-                        <TabsTrigger value="create-admin" className="flex items-center gap-2">
+                        <TabsTrigger value="create-admin" className="flex items-center gap-2 border border-gray-300">
                             <Shield className="h-4 w-4" />
                             Create Admin
                         </TabsTrigger>
+                        <TabsTrigger value="email-stats" className="flex items-center gap-2 border border-gray-300">
+                            <BarChart3 className="h-4 w-4" />
+                            Email Stats
+                        </TabsTrigger>
+                        <TabsTrigger value="email-logs" className="flex items-center gap-2 border border-gray-300">
+                            <Mail className="h-4 w-4" />
+                            Email Logs
+                        </TabsTrigger>
+                        
                     </TabsList>
 
                     {/* Users List Tab */}
@@ -547,6 +617,53 @@ function AdminContent() {
                                         )}
                                     </Button>
                                 </form>
+                            </CardContent>
+                        </Card>
+                    </TabsContent>
+                    {/* EMAIL LOGS */}
+                    {/* Email Logs Tab */}
+                    <TabsContent value="email-logs">
+                        <Card>
+                            <CardHeader>
+                                <CardTitle>Email Transaction Logs</CardTitle>
+                                <CardDescription>
+                                    View all email communications sent by the system
+                                </CardDescription>
+                            </CardHeader>
+                            <CardContent>
+                                <EmailLogsTable
+                                    logs={emailLogs}
+                                    isLoading={isLoadingEmails}
+                                    page={emailLogsPage}
+                                    totalPages={emailLogsTotalPages}
+                                    onPageChange={async (page) => {
+                                        setEmailLogsPage(page);
+                                        await fetchEmailLogs(page);
+                                    }}
+                                />
+                            </CardContent>
+                        </Card>
+                    </TabsContent>
+
+                    {/* Email Stats Tab */}
+                    <TabsContent value="email-stats">
+                        <Card>
+                            <CardHeader>
+                                <CardTitle>Email Analytics</CardTitle>
+                                <CardDescription>
+                                    Monitor email delivery and engagement metrics
+                                </CardDescription>
+                            </CardHeader>
+                            <CardContent>
+                                <EmailStatsDashboard
+                                    stats={emailStats}
+                                    isLoading={isLoadingEmails}
+                                    selectedDateRange={selectedDateRange}
+                                    onDateRangeChange={async (range) => {
+                                        setSelectedDateRange(range);
+                                        await fetchEmailStats();
+                                    }}
+                                />
                             </CardContent>
                         </Card>
                     </TabsContent>

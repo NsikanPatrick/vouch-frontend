@@ -189,6 +189,35 @@ class ApiClient {
             },
         });
     }
+
+    // EMAILS
+    async getEmailStats(url: string): Promise<any> {
+        const accessToken = localStorage.getItem('accessToken');
+        if (!accessToken) {
+            throw new Error('No authentication token found');
+        }
+
+        return this.request(url, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${accessToken}`,
+            },
+        });
+    }
+
+    async getEmailLogs(page: number = 1, limit: number = 20): Promise<any> {
+        const accessToken = localStorage.getItem('accessToken');
+        if (!accessToken) {
+            throw new Error('No authentication token found');
+        }
+
+        return this.request(`/admin/emails/logs?page=${page}&limit=${limit}`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${accessToken}`,
+            },
+        });
+    }
 }
 
 export const apiClient = new ApiClient();
