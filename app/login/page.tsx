@@ -39,7 +39,7 @@ export default function LoginPage() {
             return;
         }
 
-        // ✅ Clear any existing session data before new login
+        // Clear any existing session data before new login
         localStorage.removeItem('accessToken');
         localStorage.removeItem('refreshToken');
         localStorage.removeItem('user');

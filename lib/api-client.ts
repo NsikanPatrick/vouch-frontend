@@ -30,18 +30,33 @@ export interface ErrorResponse {
     statusCode: number;
 }
 
+export interface User {
+    id: string;
+    email: string;
+    name: string;
+    role: string;
+    status: string;
+    profilePicture?: string | null;
+    createdAt?: string;
+    lastLoginAt?: string;
+}
+
 class ApiClient {
     private async request<T>(
         endpoint: string,
         options: RequestInit = {}
     ): Promise<T> {
         const url = `${API_BASE_URL}${endpoint}`;
+
+        // Merge headers properly
+        const headers = {
+            'Content-Type': 'application/json',
+            ...options.headers,
+        };
+
         const response = await fetch(url, {
             ...options,
-            headers: {
-                'Content-Type': 'application/json',
-                ...options.headers,
-            },
+            headers,
         });
 
         const data = await response.json();
@@ -86,6 +101,91 @@ class ApiClient {
             method: 'GET',
             headers: {
                 Authorization: `Bearer ${accessToken}`,
+            },
+        });
+    }
+
+    // ==================== ADMIN FUNCTIONS ====================
+    // All admin methods must include the Authorization header
+
+    async createAdmin(data: RegisterData): Promise<AuthResponse> {
+        const accessToken = localStorage.getItem('accessToken');
+        if (!accessToken) {
+            throw new Error('No authentication token found');
+        }
+
+        return this.request<AuthResponse>('/auth/create-admin', {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${accessToken}`,
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        });
+    }
+
+    async getAllUsers(page: number = 1, limit: number = 10): Promise<{
+        users: User[];
+        total: number;
+        page: number;
+        limit: number;
+        totalPages: number;
+    }> {
+        const accessToken = localStorage.getItem('accessToken');
+        if (!accessToken) {
+            throw new Error('No authentication token found');
+        }
+
+        return this.request('/auth/users', {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${accessToken}`,
+            },
+        });
+    }
+
+    async updateUserStatus(userId: string, status: string): Promise<{ message: string }> {
+        const accessToken = localStorage.getItem('accessToken');
+        if (!accessToken) {
+            throw new Error('No authentication token found');
+        }
+
+        return this.request(`/auth/users/${userId}/status`, {
+            method: 'PATCH',
+            headers: {
+                'Authorization': `Bearer ${accessToken}`,
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ status }),
+        });
+    }
+
+    async updateUserRole(userId: string, role: string): Promise<{ message: string; user: any }> {
+        const accessToken = localStorage.getItem('accessToken');
+        if (!accessToken) {
+            throw new Error('No authentication token found');
+        }
+
+        return this.request(`/auth/users/${userId}/role`, {
+            method: 'PATCH',
+            headers: {
+                'Authorization': `Bearer ${accessToken}`,
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ role }),
+        });
+    }
+
+    async deleteUser(userId: string): Promise<{ message: string }> {
+        const accessToken = localStorage.getItem('accessToken');
+        if (!accessToken) {
+            throw new Error('No authentication token found');
+        }
+
+        return this.request(`/auth/users/${userId}`, {
+            method: 'DELETE',
+            headers: {
+                'Authorization': `Bearer ${accessToken}`,
             },
         });
     }

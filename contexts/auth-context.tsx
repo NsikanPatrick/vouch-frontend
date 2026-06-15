@@ -186,20 +186,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         }
     };
 
-    // const signOut = async () => {
-    //     if (refreshToken) {
-    //         try {
-    //             await apiClient.logout(refreshToken);
-    //         } catch (error) {
-    //             console.error('Logout error:', error);
-    //         }
-    //     }
-
-    //     setAccessToken(null);
-    //     setRefreshToken(null);
-    //     setUser(null);
-    // };
-
     const signOut = async () => {
         setIsLoading(true);
 
@@ -209,7 +195,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
             if (currentRefreshToken) {
                 try {
                     await apiClient.logout(currentRefreshToken);
-                    console.log('✅ Token revoked on backend');
+                    console.log('Token revoked on backend');
                 } catch (error) {
                     console.error('Logout API error:', error);
                     // Continue with local cleanup even if API fails
@@ -225,7 +211,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
             sessionStorage.removeItem('otpEmail');
 
             // 4. Clear any other app-specific storage
-            // Add any other keys you might have stored
             // localStorage.removeItem('someOtherKey');
 
             // 5. Clear React state
@@ -233,7 +218,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
             setRefreshToken(null);
             setUser(null);
 
-            console.log('✅ All auth data cleared from storage');
+            console.log('All auth data cleared from storage');
 
         } catch (error) {
             console.error('Logout error:', error);
@@ -267,7 +252,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
             const newUser = { ...user, ...updatedUserData };
             setUser(newUser);
             localStorage.setItem('user', JSON.stringify(newUser));
-            console.log('🔄 Updated user:', newUser);
+            console.log('Updated user:', newUser);
         }
     };
 
