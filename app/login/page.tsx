@@ -63,10 +63,10 @@ export default function LoginPage() {
         <div className="flex min-h-screen items-center justify-center bg-background p-4">
             <Card className="w-full max-w-md">
                 <CardHeader>
-                    <CardTitle>Login</CardTitle>
-                    <CardDescription>Welcome back! Please sign in to continue</CardDescription>
+                    <CardTitle className={`text-primary`}>Login</CardTitle>
+                    <CardDescription className={`text-primary`}>Welcome back! Please sign in to continue</CardDescription>
                 </CardHeader>
-                <CardContent>
+                <CardContent className={`text-primary`}>
                     <form onSubmit={handleSubmit} className="space-y-4">
                         <div className="space-y-2">
                             <Label htmlFor="email">Email</Label>
@@ -102,7 +102,7 @@ export default function LoginPage() {
                                 {error}
                             </div>
                         )}
-                        <Button type="submit" className="w-full bg-blue-950 hover:bg-blue-900" disabled={isLoading}>
+                        <Button type="submit" className="w-full bg-primary hover:bg-blue-900" disabled={isLoading}>
                             {isLoading ? "Signing you in..." : "Sign In"}
                         </Button>
 

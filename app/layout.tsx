@@ -18,10 +18,23 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+// export const metadata: Metadata = {
+//   title: "Vouch",
+//   description: "Your Robust Authentication System",
+// };
 export const metadata: Metadata = {
   title: "Vouch",
   description: "Your Robust Authentication System",
-};
+  icons: {
+    icon: [
+      { url: '/favicon.ico?v=20260617', sizes: 'any' },
+      { url: '/logo.svg?v=20260617', type: 'image/svg+xml' },
+    ],
+    apple: [
+      // { url: '/apple-touch-icon.png' },
+    ],
+  },
+}
 
 export default function RootLayout({
   children,
@@ -33,6 +46,12 @@ export default function RootLayout({
       lang="en"
       className={cn("h-full", "antialiased", geistSans.variable, geistMono.variable, "font-sans", notoSans.variable, playfairDisplayHeading.variable)}
     >
+      {/* <head>
+        <link rel="icon" href="/favicon.ico?v=2" sizes="any" />
+        <link rel="icon" href="/icon.svg?v=2" type="image/svg+xml" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=3" />
+        <link rel="manifest" href="/manifest.json" />
+      </head> */}
       <body className="min-h-full flex flex-col">
         <AuthProvider>
           {children}
