@@ -60,39 +60,22 @@ https://vouch-utility.vercel.app
 
 The frontend repository is structured around Next.js Route Groups and decoupled architectural boundaries to segregate access scopes cleanly:
 
-vouch-frontend/
-├── app/
-│   ├── (auth)/             # Route Group: Unauthenticated entry gateways
-│   │   ├── login/          # Credential and OAuth entry forms
-│   │   ├── signup/         # Multi-channel tenant registration
-│   │   ├── forgot-password/# Recovery dispatch trigger view
-│   │   ├── reset-password/ # Secret token validation and mutation layout
-│   │   └── verify-email/   # Registration completion hook
-│   ├── (dashboard)/        # Route Group: Guarded session viewports
-│   │   ├── dashboard/      # Standard client workspace hub
-│   │   ├── profile/        # Identity settings and media upload logic
-│   │   ├── change-password/# Active session credential updating
-│   │   └── admin/          # Restricted analytics and tenant control center
-│   ├── auth/
-│   │   └── oauth-redirect/ # Decoupled Google OAuth callback processing node
-│   ├── otp/
-│   │   ├── request/        # Magic OTP token dispatch interface
-│   │   └── verify/         # Numeric validation and session generation hook
-│   └── layout.tsx          # Master layout shell injecting state providers
-├── components/             # Decoupled interface building blocks
-│   ├── ui/                 # Accessible atomic design primitives (shadcn)
-│   ├── page/               # Viewport-specific layouts and context blocks
-│   └── admin/              # Isolated telemetry panels and data matrices
-├── contexts/
-│   └── auth-context.tsx    # State insulation: Token rotation and session lifecycles
-├── lib/
-│   └── api-client.ts       # Network layer: Interceptor-armed class based API bridge
-├── styles/
-│   └── globals.css         # Universal design tokens and Tailwind baseline layout rules
-├── .env.local              # Local instance orchestration variable parameters
-├── next.config.js          # Next.js engine runtime compilation profiles
-├── package.json            # Manifest file declaring systems software dependencies
-└── README.md               # Unified client-side architectural log
+
+### 📂 Directory Descriptions
+
+| Directory | Purpose |
+|-----------|---------|
+| `app/(auth)/` | Public authentication pages (login, signup, password reset) |
+| `app/(dashboard)/` | Protected pages requiring authentication |
+| `app/auth/` | OAuth and social authentication handlers |
+| `app/otp/` | Passwordless OTP authentication flow |
+| `components/ui/` | Reusable UI primitives from shadcn/ui |
+| `components/page/` | Page-specific components like `ProtectedRoute` |
+| `components/admin/` | Admin panel components for user management and email analytics |
+| `contexts/` | React context providers (auth, theme, etc.) |
+| `lib/` | Utility functions, API client, and helpers |
+| `public/` | Static assets served directly by Next.js |
+| `styles/` | Global CSS and Tailwind configuration |
 
 ---
 
