@@ -194,20 +194,41 @@ npm run export
 
 The frontend application communicates with the decoupled Vouch backend using an abstracted, strongly typed class-based API client instance.
 
-### typescript
-import { apiClient } from '@/lib/api-client';
+### import { apiClient } from '@/lib/api-client';
 
-// Example: Session Generation / Authentication Login
-const response = await apiClient.login({ email, password });
+### Example: Session Generation / Authentication Login
+    const response = await apiClient.login({ email, password });
 
-// Example: Authenticated Context Profile Hydration
-const user = await apiClient.getProfile(accessToken);
+### Example: Authenticated Context Profile Hydration
+    const user = await apiClient.getProfile(accessToken);
 
-// Example: Restricted Administrative Operations
-const users = await apiClient.getAllUsers(page, limit);
-await apiClient.updateUserStatus(userId, 'active');
+### Example: Restricted Administrative Operations
+    const users = await apiClient.getAllUsers(page, limit);
+    await apiClient.updateUserStatus(userId, 'active');
 
-### ⚙️ Core API Client Characteristics
+## 🔐 Available Methods
+### Authentication
+    apiClient.register(data: RegisterData): Promise<AuthResponse>
+    apiClient.login(data: LoginData): Promise<AuthResponse>
+    apiClient.refreshToken(refreshToken: string): Promise<{ accessToken: string }>
+    apiClient.logout(refreshToken: string): Promise<{ message: string }>
+
+### User Profile
+    apiClient.getProfile(accessToken: string): Promise<User>
+    apiClient.updateProfile(userId: string, data: UpdateProfileData): Promise<User>
+
+### Admin Operations
+    apiClient.getAllUsers(page: number, limit: number): Promise<PaginatedUsers>
+    apiClient.updateUserStatus(userId: string, status: string): Promise<{ message: string }>
+    apiClient.updateUserRole(userId: string, role: string): Promise<{ message: string }>
+    apiClient.deleteUser(userId: string): Promise<{ message: string }>
+    apiClient.createAdmin(data: RegisterData): Promise<AuthResponse>
+
+### Email Analytics
+    apiClient.getEmailStats(url: string): Promise<EmailStats>
+    apiClient.getEmailLogs(page: number, limit: number): Promise<EmailLogs>
+
+## ⚙️ Core API Client Characteristics
 * **Type-Safe Requests:** Full compile-time TypeScript contract validation mapping incoming and outgoing server payloads.
 * **Consistent Error Handling:** Automated parsing and normalization of backend exception messages before they reach the UI layers.
 * **Authentication Header Injection:** Automatic extraction and insertion of Bearer tokens into outgoing network frames.
@@ -215,29 +236,6 @@ await apiClient.updateUserStatus(userId, 'active');
 
 ---
 
-## 🔐 Available Methods
-// Authentication
-apiClient.register(data: RegisterData): Promise<AuthResponse>
-apiClient.login(data: LoginData): Promise<AuthResponse>
-apiClient.refreshToken(refreshToken: string): Promise<{ accessToken: string }>
-apiClient.logout(refreshToken: string): Promise<{ message: string }>
-
-// User Profile
-apiClient.getProfile(accessToken: string): Promise<User>
-apiClient.updateProfile(userId: string, data: UpdateProfileData): Promise<User>
-
-// Admin Operations
-apiClient.getAllUsers(page: number, limit: number): Promise<PaginatedUsers>
-apiClient.updateUserStatus(userId: string, status: string): Promise<{ message: string }>
-apiClient.updateUserRole(userId: string, role: string): Promise<{ message: string }>
-apiClient.deleteUser(userId: string): Promise<{ message: string }>
-apiClient.createAdmin(data: RegisterData): Promise<AuthResponse>
-
-// Email Analytics
-apiClient.getEmailStats(url: string): Promise<EmailStats>
-apiClient.getEmailLogs(page: number, limit: number): Promise<EmailLogs>
-
----
 ## 🎨 UI Components
 
 The application leverages **shadcn/ui** to provide consistent, accessible, and unstyled structural primitives that map to our unified design tokens:
