@@ -215,6 +215,29 @@ await apiClient.updateUserStatus(userId, 'active');
 
 ---
 
+## 🔐 Available Methods
+// Authentication
+apiClient.register(data: RegisterData): Promise<AuthResponse>
+apiClient.login(data: LoginData): Promise<AuthResponse>
+apiClient.refreshToken(refreshToken: string): Promise<{ accessToken: string }>
+apiClient.logout(refreshToken: string): Promise<{ message: string }>
+
+// User Profile
+apiClient.getProfile(accessToken: string): Promise<User>
+apiClient.updateProfile(userId: string, data: UpdateProfileData): Promise<User>
+
+// Admin Operations
+apiClient.getAllUsers(page: number, limit: number): Promise<PaginatedUsers>
+apiClient.updateUserStatus(userId: string, status: string): Promise<{ message: string }>
+apiClient.updateUserRole(userId: string, role: string): Promise<{ message: string }>
+apiClient.deleteUser(userId: string): Promise<{ message: string }>
+apiClient.createAdmin(data: RegisterData): Promise<AuthResponse>
+
+// Email Analytics
+apiClient.getEmailStats(url: string): Promise<EmailStats>
+apiClient.getEmailLogs(page: number, limit: number): Promise<EmailLogs>
+
+---
 ## 🎨 UI Components
 
 The application leverages **shadcn/ui** to provide consistent, accessible, and unstyled structural primitives that map to our unified design tokens:
