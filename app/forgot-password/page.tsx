@@ -57,9 +57,9 @@ export default function ForgotPasswordPage() {
     if (success) {
         return (
             <div className="flex min-h-screen items-center justify-center bg-background p-4">
-                <Card className="w-full max-w-md">
+                <Card className="w-full max-w-md text-primary">
                     <CardHeader>
-                        <CardTitle>Check Your Email</CardTitle>
+                        <CardTitle className='text-primary'>Check Your Email</CardTitle>
                         <CardDescription>
                             We've sent you a password reset link
                         </CardDescription>
@@ -72,7 +72,7 @@ export default function ForgotPasswordPage() {
                             Click the link in the email to reset your password. The link will expire in 1 hour.
                         </p>
                         <Button variant="outline" className="w-full" asChild>
-                            <Link href="/login">
+                            <Link href="/login" className='text-primary-hover'>
                                 <ArrowLeft className="mr-2 h-4 w-4" />
                                 Back to Login
                             </Link>
@@ -85,9 +85,9 @@ export default function ForgotPasswordPage() {
 
     return (
         <div className="flex min-h-screen items-center justify-center bg-background p-4">
-            <Card className="w-full max-w-md">
+            <Card className="w-full max-w-md text-primary">
                 <CardHeader>
-                    <CardTitle>Forgot Password</CardTitle>
+                    <CardTitle className='text-primary'>Forgot Password</CardTitle>
                     <CardDescription>
                         Enter your email address and we'll send you a link to reset your password
                     </CardDescription>
@@ -129,7 +129,7 @@ export default function ForgotPasswordPage() {
                         </Button>
 
                         <div className="text-center text-sm">
-                            <Link href="/login" className="text-primary hover:underline">
+                            <Link href="/login" className="text-primary-hover hover:underline">
                                 Back to Login
                             </Link>
                         </div>

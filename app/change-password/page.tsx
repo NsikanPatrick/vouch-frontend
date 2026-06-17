@@ -86,14 +86,14 @@ function ChangePasswordContent() {
         <div className="min-h-screen bg-background">
             <header className="sticky top-0 z-50 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
                 <div className="container mx-auto flex h-16 items-center px-4">
-                    <Link href="/dashboard" className="text-xl font-bold">
+                    <Link href="/dashboard" className="text-xl font-bold text-primary">
                         ← Back to Dashboard
                     </Link>
                 </div>
             </header>
 
             <main className="container mx-auto flex items-center justify-center p-4">
-                <Card className="w-full max-w-md">
+                <Card className="w-full max-w-md text-primary">
                     <CardHeader>
                         <CardTitle>Change Password</CardTitle>
                         <CardDescription>Update your account password</CardDescription>

@@ -62,9 +62,9 @@ function DashboardContent() {
         <div className="min-h-screen bg-background">
             {/* Header */}
             <header className="sticky top-0 z-50 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-                <div className="container mx-auto flex h-16 items-center justify-between px-4">
+                <div className="container mx-auto flex h-16 items-center justify-between text-primary px-4">
                     <h1 className="text-xl font-bold">Vouch Dashboard</h1>
-                    <Button variant="outline" onClick={handleLogout}>
+                    <Button variant="outline" onClick={handleLogout} className="border border-primary">
                         Logout
                     </Button>
                 </div>
@@ -74,7 +74,7 @@ function DashboardContent() {
             <main className="container mx-auto p-4">
                 <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
                     {/* User Profile Card */}
-                    <Card>
+                    <Card className="text-primary">
                         <CardHeader className="flex flex-row items-center gap-4">
                             <Avatar className="h-16 w-16">
                                 <AvatarImage
@@ -95,20 +95,20 @@ function DashboardContent() {
                         </CardHeader>
                         <CardContent className="space-y-2">
                             <div>
-                                <p className="text-sm font-medium text-muted-foreground">Name</p>
-                                <p className="text-lg">{user?.name}</p>
+                                <p className="text-md font-medium text-muted-foreground">Name</p>
+                                <p className="text-md">{user?.name}</p>
                             </div>
                             <div>
-                                <p className="text-sm font-medium text-muted-foreground">Email</p>
-                                <p className="text-lg">{user?.email}</p>
+                                <p className="text-md font-medium text-muted-foreground">Email</p>
+                                <p className="text-md">{user?.email}</p>
                             </div>
                             <div>
-                                <p className="text-sm font-medium text-muted-foreground">Role</p>
-                                <p className="text-lg capitalize">{user?.role}</p>
+                                <p className="text-md font-medium text-muted-foreground">Role</p>
+                                <p className="text-md capitalize">{user?.role}</p>
                             </div>
                             <div>
-                                <p className="text-sm font-medium text-muted-foreground">Account Status</p>
-                                <p className="text-lg capitalize">{user?.status}</p>
+                                <p className="text-md font-medium text-muted-foreground">Account Status</p>
+                                <p className="text-md capitalize">{user?.status}</p>
                             </div>
                             <Button variant="outline" className="w-full mt-4" asChild>
                                 <Link href="/profile">Edit Profile</Link>
@@ -117,7 +117,7 @@ function DashboardContent() {
                     </Card>
 
                     {/* Account Status Card */}
-                    <Card>
+                    <Card className="text-primary">
                         <CardHeader>
                             <CardTitle>Account Status</CardTitle>
                             <CardDescription>Your account verification status</CardDescription>
@@ -140,7 +140,7 @@ function DashboardContent() {
                     </Card>
 
                     {/* Quick Actions Card */}
-                    <Card>
+                    <Card className="text-primary">
                         <CardHeader>
                             <CardTitle>Quick Actions</CardTitle>
                             <CardDescription>Common tasks</CardDescription>

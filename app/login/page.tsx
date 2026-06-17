@@ -61,10 +61,10 @@ export default function LoginPage() {
 
     return (
         <div className="flex min-h-screen items-center justify-center bg-background p-4">
-            <Card className="w-full max-w-md">
+            <Card className="w-full max-w-md text-primary">
                 <CardHeader>
                     <CardTitle className={`text-primary`}>Login</CardTitle>
-                    <CardDescription className={`text-primary`}>Welcome back! Please sign in to continue</CardDescription>
+                    <CardDescription>Welcome back! Please sign in to continue</CardDescription>
                 </CardHeader>
                 <CardContent className={`text-primary`}>
                     <form onSubmit={handleSubmit} className="space-y-4">
@@ -93,7 +93,7 @@ export default function LoginPage() {
                             />
                         </div>
                         <div className="text-right text-sm">
-                            <Link href="/forgot-password" className="text-primary hover:underline">
+                            <Link href="/forgot-password" className="text-primary-hover hover:underline">
                                 Forgot password?
                             </Link>
                         </div>
@@ -143,7 +143,7 @@ export default function LoginPage() {
                 </CardContent>
                 <div className="pb-6 text-center text-sm">
                     Don't have an account?{" "}
-                    <Link href="/signup" className="text-primary hover:underline">
+                    <Link href="/signup" className="text-primary-hover hover:underline">
                         Sign up
                     </Link>
                 </div>

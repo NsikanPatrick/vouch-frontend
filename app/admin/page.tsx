@@ -380,7 +380,7 @@ function AdminContent() {
         <div className="min-h-screen bg-background">
             {/* Header with Refresh Button */}
             <header className="sticky top-0 z-50 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-                <div className="container mx-auto flex h-16 items-center justify-between px-4">
+                <div className="container mx-auto flex h-16 items-center justify-between text-primary px-4">
                     <div className="flex items-center gap-4">
                         <a href="/dashboard" className="text-xl font-bold hover:text-primary transition-colors">
                             ← Back to Dashboard
@@ -390,7 +390,7 @@ function AdminContent() {
                             <span className="text-sm font-medium text-purple-500">Admin Panel</span>
                         </div>
                     </div>
-                    {/* ✅ Refresh button now calls handleRefresh which checks the active tab */}
+                    {/* Refresh button now calls handleRefresh which checks the active tab */}
                     <Button variant="outline" size="sm" onClick={handleRefresh}>
                         <RefreshCw className="mr-2 h-4 w-4" />
                         Refresh
@@ -401,27 +401,27 @@ function AdminContent() {
             <main className="container mx-auto p-4">
                 <Tabs defaultValue="users" value={activeTab} onValueChange={setActiveTab} className="space-y-4">
                     <TabsList>
-                        <TabsTrigger value="users" className="flex items-center gap-2 border border-gray-300">
-                            <Users className="h-4 w-4" />
+                        <TabsTrigger value="users" className="flex items-center text-primary gap-2 border border-gray-300 hover:cursor-pointer">
+                            <Users className="h-4 w-4 text-primary" />
                             All Users
                         </TabsTrigger>
-                        <TabsTrigger value="create-admin" className="flex items-center gap-2 border border-gray-300">
-                            <Shield className="h-4 w-4" />
+                        <TabsTrigger value="create-admin" className="flex items-center text-primary gap-2 border border-gray-300 hover:cursor-pointer">
+                            <Shield className="h-4 w-4 text-primary" />
                             Create Admin
                         </TabsTrigger>
-                        <TabsTrigger value="email-stats" className="flex items-center gap-2 border border-gray-300">
-                            <BarChart3 className="h-4 w-4" />
+                        <TabsTrigger value="email-stats" className="flex items-center text-primary gap-2 border border-gray-300 hover:cursor-pointer">
+                            <BarChart3 className="h-4 w-4 text-primary" />
                             Email Stats
                         </TabsTrigger>
-                        <TabsTrigger value="email-logs" className="flex items-center gap-2 border border-gray-300">
-                            <Mail className="h-4 w-4" />
+                        <TabsTrigger value="email-logs" className="flex items-center text-primary gap-2 border border-gray-300 hover:cursor-pointer">
+                            <Mail className="h-4 w-4 text-primary" />
                             Email Logs
                         </TabsTrigger>
                     </TabsList>
 
                     {/* Users List Tab */}
                     <TabsContent value="users">
-                        <Card>
+                        <Card className='text-primary'>
                             <CardHeader>
                                 <CardTitle>User Management</CardTitle>
                                 <CardDescription>
@@ -548,7 +548,7 @@ function AdminContent() {
 
                     {/* Create Admin Tab */}
                     <TabsContent value="create-admin">
-                        <Card>
+                        <Card className='text-primary'>
                             <CardHeader>
                                 <CardTitle>Create Admin Account</CardTitle>
                                 <CardDescription>
@@ -640,7 +640,7 @@ function AdminContent() {
 
                     {/* Email Logs Tab */}
                     <TabsContent value="email-logs">
-                        <Card>
+                        <Card className='text-primary'>
                             <CardHeader>
                                 <CardTitle>Email Transaction Logs</CardTitle>
                                 <CardDescription>
@@ -664,7 +664,7 @@ function AdminContent() {
 
                     {/* Email Stats Tab */}
                     <TabsContent value="email-stats">
-                        <Card>
+                        <Card className='text-primary'>
                             <CardHeader>
                                 <CardTitle>Email Analytics</CardTitle>
                                 <CardDescription>

@@ -78,9 +78,9 @@ export default function SignupPage() {
 
     return (
         <div className="flex min-h-screen items-center justify-center bg-background p-4">
-            <Card className="w-full max-w-md">
+            <Card className="w-full max-w-md text-primary">
                 <CardHeader>
-                    <CardTitle>Sign Up</CardTitle>
+                    <CardTitle className="text-primary">Sign Up</CardTitle>
                     <CardDescription>Create a new account to get started</CardDescription>
                 </CardHeader>
                 <CardContent>
@@ -149,14 +149,14 @@ export default function SignupPage() {
                             </div>
                         )}
 
-                        <Button type="submit" className="w-full" disabled={isLoading}>
+                        <Button type="submit" className="w-full hover:bg-primary-hover" disabled={isLoading}>
                             {isLoading ? "Creating your account..." : "Sign Up"}
                         </Button>
                     </form>
                 </CardContent>
                 <div className="pb-6 text-center text-sm">
                     Already have an account?{" "}
-                    <Link href="/login" className="text-primary hover:underline">
+                    <Link href="/login" className="text-primary-hover hover:underline">
                         Login
                     </Link>
                 </div>

@@ -73,10 +73,10 @@ function StatSummaryCards({ stats }: { stats: EmailStatsDashboardProps['stats'] 
 
     return (
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4 mb-6">
-            <Card>
+            <Card className='text-primary'>
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                     <CardTitle className="text-sm font-medium">Total Emails</CardTitle>
-                    <Send className="h-4 w-4 text-muted-foreground" />
+                    <Send className="h-4 w-4" />
                 </CardHeader>
                 <CardContent>
                     <div className="text-2xl font-bold">{totals.total}</div>
@@ -85,10 +85,10 @@ function StatSummaryCards({ stats }: { stats: EmailStatsDashboardProps['stats'] 
                     </p>
                 </CardContent>
             </Card>
-            <Card>
+            <Card className='text-primary'>
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                     <CardTitle className="text-sm font-medium">Delivery Rate</CardTitle>
-                    <MailCheck className="h-4 w-4 text-muted-foreground" />
+                    <MailCheck className="h-4 w-4" />
                 </CardHeader>
                 <CardContent>
                     <div className="text-2xl font-bold">{deliveryRate}%</div>
@@ -97,10 +97,10 @@ function StatSummaryCards({ stats }: { stats: EmailStatsDashboardProps['stats'] 
                     </p>
                 </CardContent>
             </Card>
-            <Card>
+            <Card className='text-primary'>
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                     <CardTitle className="text-sm font-medium">Open Rate</CardTitle>
-                    <Eye className="h-4 w-4 text-muted-foreground" />
+                    <Eye className="h-4 w-4" />
                 </CardHeader>
                 <CardContent>
                     <div className="text-2xl font-bold">{openRate}%</div>
@@ -109,14 +109,14 @@ function StatSummaryCards({ stats }: { stats: EmailStatsDashboardProps['stats'] 
                     </p>
                 </CardContent>
             </Card>
-            <Card>
+            <Card className='text-primary'>
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                     <CardTitle className="text-sm font-medium">Click Rate</CardTitle>
                     <MousePointerClick className="h-4 w-4 text-muted-foreground" />
                 </CardHeader>
                 <CardContent>
                     <div className="text-2xl font-bold">{clickRate}%</div>
-                    <p className="text-xs text-muted-foreground">
+                    <p className="text-xs">
                         {totals.clicked} clicked of {totals.opened} opened
                     </p>
                 </CardContent>

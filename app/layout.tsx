@@ -18,10 +18,6 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-// export const metadata: Metadata = {
-//   title: "Vouch",
-//   description: "Your Robust Authentication System",
-// };
 export const metadata: Metadata = {
   title: "Vouch",
   description: "Your Robust Authentication System",
