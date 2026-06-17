@@ -56,41 +56,43 @@ https://vouch-utility.vercel.app
 
 ---
 
-## 🗂️ Project Structure
+## 📂 Project Directory Structure
+
+The frontend repository is structured around Next.js Route Groups and decoupled architectural boundaries to segregate access scopes cleanly:
 
 vouch-frontend/
 ├── app/
-│   ├── (auth)/
-│   │   ├── login/
-│   │   ├── signup/
-│   │   ├── forgot-password/
-│   │   ├── reset-password/
-│   │   └── verify-email/
-│   ├── (dashboard)/
-│   │   ├── dashboard/
-│   │   ├── profile/
-│   │   ├── change-password/
-│   │   └── admin/
+│   ├── (auth)/             # Route Group: Unauthenticated entry gateways
+│   │   ├── login/          # Credential and OAuth entry forms
+│   │   ├── signup/         # Multi-channel tenant registration
+│   │   ├── forgot-password/# Recovery dispatch trigger view
+│   │   ├── reset-password/ # Secret token validation and mutation layout
+│   │   └── verify-email/   # Registration completion hook
+│   ├── (dashboard)/        # Route Group: Guarded session viewports
+│   │   ├── dashboard/      # Standard client workspace hub
+│   │   ├── profile/        # Identity settings and media upload logic
+│   │   ├── change-password/# Active session credential updating
+│   │   └── admin/          # Restricted analytics and tenant control center
 │   ├── auth/
-│   │   └── oauth-redirect/
+│   │   └── oauth-redirect/ # Decoupled Google OAuth callback processing node
 │   ├── otp/
-│   │   ├── request/
-│   │   └── verify/
-│   └── layout.tsx
-├── components/
-│   ├── ui/                 # shadcn/ui components
-│   ├── page/               # Page-specific components
-│   └── admin/              # Admin panel components
+│   │   ├── request/        # Magic OTP token dispatch interface
+│   │   └── verify/         # Numeric validation and session generation hook
+│   └── layout.tsx          # Master layout shell injecting state providers
+├── components/             # Decoupled interface building blocks
+│   ├── ui/                 # Accessible atomic design primitives (shadcn)
+│   ├── page/               # Viewport-specific layouts and context blocks
+│   └── admin/              # Isolated telemetry panels and data matrices
 ├── contexts/
-│   └── auth-context.tsx    # Authentication state management
+│   └── auth-context.tsx    # State insulation: Token rotation and session lifecycles
 ├── lib/
-│   └── api-client.ts       # Backend API communication
+│   └── api-client.ts       # Network layer: Interceptor-armed class based API bridge
 ├── styles/
-│   └── globals.css
-├── .env.local
-├── next.config.js
-├── package.json
-└── README.md
+│   └── globals.css         # Universal design tokens and Tailwind baseline layout rules
+├── .env.local              # Local instance orchestration variable parameters
+├── next.config.js          # Next.js engine runtime compilation profiles
+├── package.json            # Manifest file declaring systems software dependencies
+└── README.md               # Unified client-side architectural log
 
 ---
 
