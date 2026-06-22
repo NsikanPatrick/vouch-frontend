@@ -47,7 +47,7 @@ https://vouch-utility.vercel.app
 
 * **Language:** ![TypeScript](https://img.shields.io/badge/TypeScript-6.x-3178C6?style=flat&logo=typescript&logoColor=white)
 * **Framework:** ![NextJS](https://img.shields.io/badge/Next.js-16.x-000000?style=flat&logo=next.js&logoColor=white ) 
-* **Styling:** ![TailwindCSS](https://img.shields.io/badge/Tailwind-4.x-06B6D4?style=flat&logo=tailwindcss&logoColor=white) *(PostgreSQL/Neon Ready)*
+* **Styling:** ![TailwindCSS](https://img.shields.io/badge/Tailwind-4.x-06B6D4?style=flat&logo=tailwindcss&logoColor=white)
 * **UI Components:** ![Shadcn](https://img.shields.io/badge/shadcn/ui-Latest-000000?style=flat&logo=shadcnui&logoColor=white) 
 * **Icons:** ![Lucid React](https://img.shields.io/badge/Lucide-React-F56565?style=flat&logo=lucide&logoColor=white)
 * **Authentication:** Custom Auth Context with JWT management.
@@ -106,10 +106,6 @@ The frontend repository is structured around Next.js Route Groups and decoupled 
 | `/admin` | Restrictive control panel orchestrating tenant index matrices |
 | `/admin/email-logs` | Granular transactional data ledger showing outbound email state history |
 | `/admin/email-stats` | High-throughput analytics engine compiling system open and delivery rates |
-
----
-
-
 
 ---
 

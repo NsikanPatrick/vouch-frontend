@@ -2,7 +2,8 @@
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 
-@custom-variant dark (&:is(.dark *));
+/* Implements dark mode on .dark class call */
+@custom-variant dark (&:is(.dark *)); 
 
 @theme inline {
   --color-background: var(--background);
@@ -51,15 +52,15 @@
 
 :root {
   --background: oklch(1 0 0);
-  --foreground: oklch(0.147 0.004 49.3);
+  --foreground: #1F2F55;
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.147 0.004 49.3);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.147 0.004 49.3);
+  --popover: oklch(97.614% 0.00011 271.152);
+  --popover-foreground: #102554;
   --primary: #102554;
   --primary-hover: #1E3A8A;
   --primary-foreground: oklch(0.986 0.002 67.8);
-  --secondary: oklch(0.96 0.002 17.2);
+  --secondary: oklch(0.4985 0.2164 262.92);
   --secondary-foreground: oklch(0.214 0.009 43.1);
   --muted: oklch(0.96 0.002 17.2);
   --muted-foreground: oklch(0.547 0.021 43.1);
@@ -86,15 +87,15 @@
 }
 
 .dark {
-  --background: oklch(0.147 0.004 49.3);
+  --background: #0F172B;
   --foreground: oklch(0.986 0.002 67.8);
   --card: oklch(0.214 0.009 43.1);
   --card-foreground: oklch(0.986 0.002 67.8);
-  --popover: oklch(0.214 0.009 43.1);
-  --popover-foreground: oklch(0.986 0.002 67.8);
+  --popover: #1F2F55;
+  --popover-foreground: oklch(91.152% 0.00417 55.564);
   --primary: oklch(0.922 0.005 34.3);
   --primary-foreground: oklch(0.214 0.009 43.1);
-  --secondary: oklch(0.268 0.011 36.5);
+  --secondary: oklch(76.42% 0.00585 30.322);
   --secondary-foreground: oklch(0.986 0.002 67.8);
   --muted: oklch(0.268 0.011 36.5);
   --muted-foreground: oklch(0.714 0.014 41.2);
@@ -123,10 +124,19 @@
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
   }
+
   html {
     @apply font-sans;
   }
+
+    .bg-black-gradient {
+      background: linear-gradient(144.39deg,
+          #ffffff -278.56%,
+          #102554 -78.47%,
+          #11101d 91.61%);
+    }
 }
