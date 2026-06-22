@@ -1,5 +1,5 @@
 
-import {Navbar} from "@/components/landing-page";
+import {Navbar, Hero} from "@/components/landing-page";
 
 export default function Home() {
   return (
@@ -12,8 +12,11 @@ export default function Home() {
       </header>
 
       {/* Content area */}
-      <main className="container mx-auto p-4">
-        <h2>Welcome to vouch utilities</h2>
+      <main>
+        <Hero />
+        <div className="container body mx-auto p-4">
+
+        </div>
       </main>
 
       <footer>
