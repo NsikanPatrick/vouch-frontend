@@ -5,9 +5,9 @@ import { features } from "../../constants"
 
 const Features = () => {
     return (
-        <section id="features" className="flex flex-col py-20 px-20 bg-popover">
-            <div className="featuresCopy max-w-2xl mb-5">
-                <h1 className=" text-3xl font-bold text-primary leading-tight mb-5">
+        <section id="features" className="flex flex-col py-20 px-5 md:px-20 bg-popover">
+            <div className="featuresCopy max-w-5xl md:max-w-2xl mb-5">
+                <h1 className="text-center md:text-start text-3xl font-bold text-primary leading-tight mb-5">
                     Everything you need. Nothing you don't.
                 </h1>
                 <p className="text-md leading-loose text-primary text-center md:text-justify max-w-2lg">
