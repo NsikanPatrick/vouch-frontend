@@ -1,3 +1,5 @@
+import {Shield, Mail, Users, FileText} from "lucide-react"
+
 export const navLinks = [
     {
         "header": {
@@ -78,22 +80,22 @@ export const copyVariants = [
 
 export const features = [
     {
-        icon: "Shield",
+        icon: <Shield />,
         title: "Secure Authentication",
         description: "Enterprise-grade security with JWT, refresh tokens, and account lockout protection."
     },
     {
-        icon: "Mail",
+        icon: <Mail />,
         title: "Passwordless Login",
         description: "OTP-based magic link authentication for a seamless user experience."
     },
     {
-        icon: "Users",
+        icon: <Users />,
         title: "Social Login",
         description: "One-click sign-in with Google OAuth 2.0 integration."
     },
     {
-        icon: "Profile",
+        icon: <FileText />,
         title: "Profile Management",
         description: "Full user profile management with Cloudinary image uploads."
     }
