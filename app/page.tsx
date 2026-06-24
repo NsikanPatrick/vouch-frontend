@@ -1,5 +1,5 @@
 
-import {Navbar, Hero} from "@/components/landing-page";
+import {Navbar, Hero, Copy} from "@/components/landing-page";
 
 export default function Home() {
   return (
@@ -14,9 +14,9 @@ export default function Home() {
       {/* Content area */}
       <main>
         <Hero />
-        <div className="container body mx-auto p-4">
-
-        </div>
+        {/* <div className="container body mx-auto p-4"> */}
+          <Copy />
+        {/* </div> */}
       </main>
 
       <footer>

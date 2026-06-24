@@ -39,6 +39,9 @@
   --color-primary-hover: var(--primary-hover);
   --color-popover-foreground: var(--popover-foreground);
   --color-popover: var(--popover);
+  --color-btn-primary: var(--btn-primary);
+  --color-btn-primary-hover: var(--btn-primary-hover);
+  /* You can also set btn-secondary and btn-secondary-hover */
   --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
   --radius-sm: calc(var(--radius) * 0.6);
@@ -62,6 +65,8 @@
   --primary-foreground: oklch(0.986 0.002 67.8);
   --secondary: oklch(0.4985 0.2164 262.92);
   --secondary-foreground: oklch(0.214 0.009 43.1);
+  --btn-primary: oklch(0.4985 0.2164 262.92);
+  --btn-primary-hover: #102554;
   --muted: oklch(0.96 0.002 17.2);
   --muted-foreground: oklch(0.547 0.021 43.1);
   --accent: oklch(0.96 0.002 17.2);
@@ -97,6 +102,8 @@
   --primary-foreground: oklch(0.214 0.009 43.1);
   --secondary: oklch(76.42% 0.00585 30.322);
   --secondary-foreground: oklch(0.986 0.002 67.8);
+  --btn-primary: oklch(0.4985 0.2164 262.92);
+  --btn-primary-hover: #102554;
   --muted: oklch(0.268 0.011 36.5);
   --muted-foreground: oklch(0.714 0.014 41.2);
   --accent: oklch(0.268 0.011 36.5);

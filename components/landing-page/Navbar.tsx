@@ -94,7 +94,7 @@ const Navbar = () => {
 
             {/* Mobile Navigation Viewport Trigger */}
             <div className="sm:hidden flex flex-1 justify-end items-center">
-                <button onClick={() => setCollapsed(!collapsed)} className="ml-auto p-2 relative z-50">
+                <button onClick={() => setCollapsed(!collapsed)} className="cursor-pointer ml-auto p-2 relative z-50">
                     <ListMinus className={`${collapsed ? "rotate-0 text-primary dark:text-white" : "rotate-180 text-primary-hover dark:text-white"} transition-transform duration-400 w-6 h-6`} />
                 </button>
 
