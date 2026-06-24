@@ -1,5 +1,5 @@
 
-import {Navbar, Hero, Copy, Features} from "@/components/landing-page";
+import {Navbar, Hero, Copy, Features, HowItWorks, Cta, TechStack, Footer} from "@/components/landing-page";
 
 export default function Home() {
   return (
@@ -17,6 +17,10 @@ export default function Home() {
         {/* <div className="container body mx-auto p-4"> */}
           <Copy />
           <Features />
+          <HowItWorks />
+          <Cta />
+          <TechStack />
+          <Footer />
         {/* </div> */}
       </main>
 

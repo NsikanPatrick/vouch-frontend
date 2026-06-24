@@ -1,11 +1,11 @@
-"use client"
+
 import {Shield, Mail, Users, FileText} from "lucide-react"
 import { features } from "../../constants"
 // import Link from "next/link"
 
 const Features = () => {
     return (
-        <section id="features" className="flex flex-col py-20 px-5 md:px-20 bg-popover">
+        <section id="features" className="flex flex-col py-20 md:py-25 px-4 md:px-20 bg-popover">
             <div className="featuresCopy max-w-5xl md:max-w-2xl mb-5">
                 <h1 className="text-center md:text-start text-3xl font-bold text-primary leading-tight mb-5">
                     Everything you need. Nothing you don't.

@@ -1,4 +1,14 @@
-import {Shield, Mail, Users, FileText} from "lucide-react"
+import {Shield, Mail, Users, FileText, UserPlus, MailCheck, Rocket, Code} from "lucide-react"
+import {
+    SiNestjs,
+    SiNextdotjs,
+    SiTypescript,
+    SiPostgresql,
+    SiTypeorm,
+    SiCloudinary,
+    SiTailwindcss,
+    SiVercel,
+} from "react-icons/si"
 
 export const navLinks = [
     {
@@ -9,11 +19,12 @@ export const navLinks = [
                 "link": "/"
             },
             "primaryNav": [
-                { "label": "Home", "href": "/" },
+                { "label": "Home", "href": "/#home" },
                 { "label": "Features", "href": "/#features" },
-                { "label": "Pricing", "href": "/#pricing" },
+                { "label": "How It Works", "href": "/#how-it-works" },
+                { "label": "Tech Stack", "href": "/#tech-stack" },
                 { "label": "Docs", "href": "/docs" },
-                { "label": "Blog", "href": "/blog" }
+                // { "label": "Blog", "href": "/blog" }
             ],
             "authActions": {
                 "login": { "label": "Login", "href": "/login" },
@@ -99,4 +110,39 @@ export const features = [
         title: "Profile Management",
         description: "Full user profile management with Cloudinary image uploads."
     }
+]
+
+export const steps = [
+    {
+        icon: <UserPlus className="h-8 w-8 text-blue-600" />,
+        title: "Sign Up",
+        description: "Create your account with email and password, or use Google OAuth for one-click registration."
+    },
+    {
+        icon: <MailCheck className="h-8 w-8 text-blue-600" />,
+        title: "Verify Your Email",
+        description: "Receive a verification link or OTP code to confirm your identity and activate your account."
+    },
+    {
+        icon: <Rocket className="h-8 w-8 text-blue-600" />,
+        title: "Start Building",
+        description: "Integrate Vouch's auth flows into your app and focus on what matters—your product."
+    }
+]
+
+export const stats = [
+    { icon: <Users className="h-5 w-5" />, label: "Open Source", value: "MIT" },
+    { icon: <Code className="h-5 w-5" />, label: "Built With", value: "NestJS" },
+    { icon: <Shield className="h-5 w-5" />, label: "Security", value: "Enterprise" },
+]
+
+export const technologies = [
+    { icon: <SiNestjs className="h-8 w-8 text-red-600" />, name: "NestJS" },
+    { icon: <SiNextdotjs className="h-8 w-8 text-black dark:text-white" />, name: "Next.js" },
+    { icon: <SiTypescript className="h-8 w-8 text-blue-600" />, name: "TypeScript" },
+    { icon: <SiPostgresql className="h-8 w-8 text-blue-800" />, name: "PostgreSQL" },
+    { icon: <SiTypeorm className="h-8 w-8 text-orange-600" />, name: "TypeORM" },
+    { icon: <SiCloudinary className="h-8 w-8 text-blue-500" />, name: "Cloudinary" },
+    { icon: <SiTailwindcss className="h-8 w-8 text-teal-500" />, name: "Tailwind CSS" },
+    { icon: <SiVercel className="h-8 w-8 text-black dark:text-white" />, name: "Vercel" },
 ]
