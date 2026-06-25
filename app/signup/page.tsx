@@ -77,8 +77,8 @@ export default function SignupPage() {
     };
 
     return (
-        <div className="flex min-h-screen items-center justify-center bg-background p-4">
-            <Card className="w-full max-w-md text-primary">
+        <div className="flex min-h-screen items-center justify-center bg-blue-50 dark:bg-[#0F172B] p-4">
+            <Card className="w-full max-w-md bg-white dark:bg-[#1F2F55] text-primary">
                 <CardHeader>
                     <CardTitle className="text-primary">Sign Up</CardTitle>
                     <CardDescription>Create a new account to get started</CardDescription>

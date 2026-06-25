@@ -1,6 +1,7 @@
 "use client"
 
 import Image from 'next/image';
+import Link from 'next/link'
 import { useState, useEffect } from "react";
 import { useTheme } from "../../hooks/use-theme";
 import { ListMinus, Sun, Moon } from 'lucide-react';
@@ -56,8 +57,9 @@ const Navbar = () => {
 
     return (
         <nav className="w-full flex py-6 justify-between items-center navbar relative z-50">
-            <Image src={logo.src} alt={logo.alt} loading='eager' width={52} height={92} className="h-8 w-8" />
-
+            <Link href="/">
+                <Image src={logo.src} alt={logo.alt} loading='eager' width={52} height={92} className="h-8 w-8" />
+            </Link>
             {/* Desktop Navigation Link Cluster */}
             <ul className="list-none sm:flex hidden justify-end items-center flex-1">
                 {header.primaryNav.map((navItem, index) => (

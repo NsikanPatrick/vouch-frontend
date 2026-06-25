@@ -8,7 +8,7 @@ const Hero = () => {
         // bg-gradient-to-br from-slate-50 to-slate-100
         <section
             id="home"
-            className="relative flex flex-col md:flex-row h-[620px] md:h-screen w-full overflow-hidden bg-popover"
+            className="relative flex flex-col md:flex-row h-[640px] md:h-screen w-full overflow-hidden bg-popover"
         >
             {/* Left Section: Text */}
             <div className="flex-1 flex flex-col justify-center items-center md:items-start md:mt-[-100px] px-8 md:px-12 lg:px-16 space-y-4 z-10">
