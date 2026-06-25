@@ -17,7 +17,7 @@ const Footer = () => {
                         <Link href="/" className="text-2xl font-bold text-white">
                             Vouch
                         </Link>
-                        <p className="text-sm text-slate-400 mt-3 max-w-xs">
+                        <p className="text-md md:text-sm text-slate-400 mt-3 max-w-xs">
                             Production-ready authentication engine for modern web apps.
                         </p>
                         <div className="flex gap-4 mt-4">
@@ -53,7 +53,7 @@ const Footer = () => {
                                 <li key={index}>
                                     <Link
                                         href={item.href}
-                                        className="text-sm text-slate-400 hover:text-white transition-colors"
+                                        className="text-md md:text-sm text-slate-400 hover:text-white transition-colors"
                                     >
                                         {item.label}
                                     </Link>
@@ -72,7 +72,7 @@ const Footer = () => {
                                 <li key={index}>
                                     <Link
                                         href={item.href}
-                                        className="text-sm text-slate-400 hover:text-white transition-colors"
+                                        className="text-md md:text-sm text-slate-400 hover:text-white transition-colors"
                                     >
                                         {item.label}
                                     </Link>
@@ -91,7 +91,7 @@ const Footer = () => {
                                 <li key={index}>
                                     <Link
                                         href={item.href}
-                                        className="text-sm text-slate-400 hover:text-white transition-colors"
+                                        className="text-md md:text-sm text-slate-400 hover:text-white transition-colors"
                                     >
                                         {item.label}
                                     </Link>
