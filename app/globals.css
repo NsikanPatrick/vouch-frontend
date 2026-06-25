@@ -139,6 +139,7 @@
   html {
     @apply font-sans;
     scroll-behavior: smooth;
+    scroll-duration: 0.5s;
   }
 
     .bg-black-gradient {

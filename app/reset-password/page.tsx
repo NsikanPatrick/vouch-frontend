@@ -101,7 +101,7 @@ function ResetPasswordForm() {
 
     if (!token && error) {
         return (
-            <Card className="w-full max-w-md">
+            <Card className="w-full max-w-md bg-white dark:bg-[#1F2F55] text-primary rounded-md">
                 <CardHeader>
                     <CardTitle>Invalid Reset Link</CardTitle>
                     <CardDescription>
@@ -122,7 +122,7 @@ function ResetPasswordForm() {
 
     if (success) {
         return (
-            <Card className="w-full max-w-md">
+            <Card className="w-full max-w-md bg-white dark:bg-[#1F2F55] text-primary rounded-md">
                 <CardHeader>
                     <div className="flex justify-center mb-4">
                         <CheckCircle className="h-16 w-16 text-green-500" />
@@ -145,7 +145,7 @@ function ResetPasswordForm() {
     }
 
     return (
-        <Card className="w-full max-w-md">
+        <Card className="w-full max-w-md bg-white dark:bg-[#1F2F55] text-primary rounded-md">
             <CardHeader>
                 <CardTitle>Reset Your Password</CardTitle>
                 <CardDescription>
@@ -251,7 +251,7 @@ function ResetPasswordForm() {
 
                     {/* Back to Login Link */}
                     <div className="text-center text-sm">
-                        <Link href="/login" className="text-primary hover:underline">
+                        <Link href="/login" className="text-secondary hover:underline">
                             Back to Login
                         </Link>
                     </div>
@@ -264,9 +264,9 @@ function ResetPasswordForm() {
 // Main component with Suspense boundary
 export default function ResetPasswordPage() {
     return (
-        <div className="flex min-h-screen items-center justify-center bg-background p-4">
+        <div className="flex min-h-screen items-center justify-center bg-blue-50 dark:bg-[#0F172B] p-4">
             <Suspense fallback={
-                <Card className="w-full max-w-md">
+                <Card className="w-full max-w-md bg-white dark:bg-[#1F2F55] text-primary rounded-md">
                     <CardContent className="flex justify-center py-8">
                         <Loader2 className="h-8 w-8 animate-spin text-primary" />
                     </CardContent>

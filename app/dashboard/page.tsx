@@ -74,7 +74,7 @@ function DashboardContent() {
             <main className="container mx-auto p-4">
                 <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
                     {/* User Profile Card */}
-                    <Card className="text-primary">
+                    <Card className="bg-white dark:bg-[#1F2F55] text-primary rounded-md">
                         <CardHeader className="flex flex-row items-center gap-4">
                             <Avatar className="h-16 w-16">
                                 <AvatarImage
@@ -117,7 +117,7 @@ function DashboardContent() {
                     </Card>
 
                     {/* Account Status Card */}
-                    <Card className="text-primary">
+                    <Card className="bg-white dark:bg-[#1F2F55] text-primary rounded-md">
                         <CardHeader>
                             <CardTitle>Account Status</CardTitle>
                             <CardDescription>Your account verification status</CardDescription>
@@ -140,7 +140,7 @@ function DashboardContent() {
                     </Card>
 
                     {/* Quick Actions Card */}
-                    <Card className="text-primary">
+                    <Card className="bg-white dark:bg-[#1F2F55] text-primary rounded-md">
                         <CardHeader>
                             <CardTitle>Quick Actions</CardTitle>
                             <CardDescription>Common tasks</CardDescription>

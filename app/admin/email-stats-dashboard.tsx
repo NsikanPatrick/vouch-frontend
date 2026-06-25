@@ -52,17 +52,36 @@ const getTypeIcon = (type: string) => {
 };
 
 function StatSummaryCards({ stats }: { stats: EmailStatsDashboardProps['stats'] }) {
-    if (!stats?.stats) return null;
+    // Ensure stats and stats.stats exist and is an array
+    if (!stats?.stats || !Array.isArray(stats.stats) || stats.stats.length === 0) {
+        return (
+            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4 mb-6">
+                {[1, 2, 3, 4].map((i) => (
+                    <Card key={i} className="bg-white dark:bg-[#1F2F55] text-primary rounded-md">
+                        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                            <CardTitle className="text-sm font-medium">No Data</CardTitle>
+                            <Send className="h-4 w-4" />
+                        </CardHeader>
+                        <CardContent>
+                            <div className="text-2xl font-bold">0</div>
+                            <p className="text-xs text-muted-foreground">No emails sent yet</p>
+                        </CardContent>
+                    </Card>
+                ))}
+            </div>
+        );
+    }
 
+    // Safely use reduce
     const totals = stats.stats.reduce(
         (acc, stat) => ({
-            total: acc.total + (parseInt(stat.total as any) || 0),
-            sent: acc.sent + (parseInt(stat.sent as any) || 0),
-            delivered: acc.delivered + (parseInt(stat.delivered as any) || 0),
-            opened: acc.opened + (parseInt(stat.opened as any) || 0),
-            clicked: acc.clicked + (parseInt(stat.clicked as any) || 0),
-            failed: acc.failed + (parseInt(stat.failed as any) || 0),
-            bounced: acc.bounced + (parseInt(stat.bounced as any) || 0),
+            total: acc.total + (Number(stat.total) || 0),
+            sent: acc.sent + (Number(stat.sent) || 0),
+            delivered: acc.delivered + (Number(stat.delivered) || 0),
+            opened: acc.opened + (Number(stat.opened) || 0),
+            clicked: acc.clicked + (Number(stat.clicked) || 0),
+            failed: acc.failed + (Number(stat.failed) || 0),
+            bounced: acc.bounced + (Number(stat.bounced) || 0),
         }),
         { total: 0, sent: 0, delivered: 0, opened: 0, clicked: 0, failed: 0, bounced: 0 }
     );
@@ -73,7 +92,7 @@ function StatSummaryCards({ stats }: { stats: EmailStatsDashboardProps['stats'] 
 
     return (
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4 mb-6">
-            <Card className='text-primary'>
+            <Card className='bg-white dark:bg-[#1F2F55] text-primary rounded-md'>
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                     <CardTitle className="text-sm font-medium">Total Emails</CardTitle>
                     <Send className="h-4 w-4" />
@@ -126,7 +145,11 @@ function StatSummaryCards({ stats }: { stats: EmailStatsDashboardProps['stats'] 
 }
 
 function EmailTypeStats({ stats }: { stats: EmailStatsDashboardProps['stats'] }) {
-    if (!stats?.stats || stats.stats.length === 0) {
+    // Ensure stats and stats.stats exist and is an array
+    const emailStats = stats?.stats;
+    const hasData = emailStats && Array.isArray(emailStats) && emailStats.length > 0;
+
+    if (!hasData) {
         return (
             <div className="text-center py-8 text-muted-foreground">
                 No email data available for the selected period
@@ -151,7 +174,7 @@ function EmailTypeStats({ stats }: { stats: EmailStatsDashboardProps['stats'] })
                         </tr>
                     </thead>
                     <tbody>
-                        {stats.stats.map((stat) => (
+                        {emailStats.map((stat) => (
                             <tr key={stat.type} className="border-b">
                                 <td className="p-3">
                                     <div className="flex items-center gap-2">
@@ -198,8 +221,8 @@ export function EmailStatsDashboard({
                     <button
                         onClick={() => onDateRangeChange('week')}
                         className={`px-3 py-1.5 text-sm rounded-l-md transition-colors ${selectedDateRange === 'week'
-                                ? 'bg-primary text-primary-foreground'
-                                : 'hover:bg-muted'
+                            ? 'bg-primary text-primary-foreground'
+                            : 'hover:bg-muted'
                             }`}
                     >
                         Last 7 Days
@@ -207,8 +230,8 @@ export function EmailStatsDashboard({
                     <button
                         onClick={() => onDateRangeChange('month')}
                         className={`px-3 py-1.5 text-sm transition-colors ${selectedDateRange === 'month'
-                                ? 'bg-primary text-primary-foreground'
-                                : 'hover:bg-muted'
+                            ? 'bg-primary text-primary-foreground'
+                            : 'hover:bg-muted'
                             }`}
                     >
                         Last 30 Days
@@ -216,8 +239,8 @@ export function EmailStatsDashboard({
                     <button
                         onClick={() => onDateRangeChange('all')}
                         className={`px-3 py-1.5 text-sm rounded-r-md transition-colors ${selectedDateRange === 'all'
-                                ? 'bg-primary text-primary-foreground'
-                                : 'hover:bg-muted'
+                            ? 'bg-primary text-primary-foreground'
+                            : 'hover:bg-muted'
                             }`}
                     >
                         All Time

@@ -12,8 +12,8 @@ import Link from "next/link";
 
 export default function VerifyEmailPendingPage() {
     return (
-        <div className="flex min-h-screen items-center justify-center bg-background p-4">
-            <Card className="w-full max-w-md">
+        <div className="flex min-h-screen items-center justify-center bg-blue-50 dark:bg-[#0F172B] p-4">
+            <Card className="w-full max-w-md bg-white dark:bg-[#1F2F55] text-primary rounded-md">
                 <CardHeader>
                     <CardTitle>Check Your Email</CardTitle>
                     <CardDescription>

@@ -56,8 +56,8 @@ export default function ForgotPasswordPage() {
 
     if (success) {
         return (
-            <div className="flex min-h-screen items-center justify-center bg-background p-4">
-                <Card className="w-full max-w-md text-primary">
+            <div className="flex min-h-screen items-center justify-center bg-blue-50 dark:bg-[#0F172B] p-4">
+                <Card className="w-full max-w-md bg-white dark:bg-[#1F2F55] text-primary rounded-md">
                     <CardHeader>
                         <CardTitle className='text-primary'>Check Your Email</CardTitle>
                         <CardDescription>
@@ -72,7 +72,7 @@ export default function ForgotPasswordPage() {
                             Click the link in the email to reset your password. The link will expire in 1 hour.
                         </p>
                         <Button variant="outline" className="w-full" asChild>
-                            <Link href="/login" className='text-primary-hover'>
+                            <Link href="/login" className='text-secondary'>
                                 <ArrowLeft className="mr-2 h-4 w-4" />
                                 Back to Login
                             </Link>
@@ -84,8 +84,8 @@ export default function ForgotPasswordPage() {
     }
 
     return (
-        <div className="flex min-h-screen items-center justify-center bg-background p-4">
-            <Card className="w-full max-w-md text-primary">
+        <div className="flex min-h-screen items-center justify-center bg-blue-50 dark:bg-[#0F172B] p-4">
+            <Card className="w-full max-w-md bg-white dark:bg-[#1F2F55] text-primary rounded-md">
                 <CardHeader>
                     <CardTitle className='text-primary'>Forgot Password</CardTitle>
                     <CardDescription>
@@ -129,7 +129,7 @@ export default function ForgotPasswordPage() {
                         </Button>
 
                         <div className="text-center text-sm">
-                            <Link href="/login" className="text-primary-hover hover:underline">
+                            <Link href="/login" className="text-secondary hover:underline">
                                 Back to Login
                             </Link>
                         </div>

@@ -158,8 +158,8 @@ export default function OtpVerifyPage() {
 
     if (!email) {
         return (
-            <div className="flex min-h-screen items-center justify-center bg-background p-4">
-                <Card className="w-full max-w-md">
+            <div className="flex min-h-screen items-center justify-center bg-blue-50 dark:bg-[#0F172B] p-4">
+                <Card className="w-full max-w-md bg-white dark:bg-[#1F2F55] text-primary rounded-md">
                     <CardContent className="flex justify-center py-8">
                         <Loader2 className="h-8 w-8 animate-spin text-primary" />
                     </CardContent>

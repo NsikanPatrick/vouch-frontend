@@ -78,7 +78,7 @@ export default function SignupPage() {
 
     return (
         <div className="flex min-h-screen items-center justify-center bg-blue-50 dark:bg-[#0F172B] p-4">
-            <Card className="w-full max-w-md bg-white dark:bg-[#1F2F55] text-primary">
+            <Card className="w-full max-w-md bg-white dark:bg-[#1F2F55] text-primary rounded-md">
                 <CardHeader>
                     <CardTitle className="text-primary">Sign Up</CardTitle>
                     <CardDescription>Create a new account to get started</CardDescription>
@@ -156,7 +156,7 @@ export default function SignupPage() {
                 </CardContent>
                 <div className="pb-6 text-center text-sm">
                     Already have an account?{" "}
-                    <Link href="/login" className="text-primary-hover hover:underline">
+                    <Link href="/login" className="text-secondary hover:underline">
                         Login
                     </Link>
                 </div>

@@ -377,7 +377,7 @@ function AdminContent() {
     }
 
     return (
-        <div className="min-h-screen bg-background">
+        <div className="min-h-screen justify-center bg-white dark:bg-[#0F172B]">
             {/* Header with Refresh Button */}
             <header className="sticky top-0 z-50 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
                 <div className="container mx-auto flex h-16 items-center justify-between text-primary px-4">
@@ -400,7 +400,7 @@ function AdminContent() {
 
             <main className="container mx-auto p-4">
                 <Tabs defaultValue="users" value={activeTab} onValueChange={setActiveTab} className="space-y-4">
-                    <TabsList>
+                    <TabsList className='bg-white dark:bg-[#1F2F55] text-primary rounded-md'>
                         <TabsTrigger value="users" className="flex items-center text-primary gap-2 border border-gray-300 hover:cursor-pointer">
                             <Users className="h-4 w-4 text-primary" />
                             All Users
@@ -421,7 +421,7 @@ function AdminContent() {
 
                     {/* Users List Tab */}
                     <TabsContent value="users">
-                        <Card className='text-primary'>
+                        <Card className='bg-white dark:bg-[#1F2F55] text-primary rounded-md'>
                             <CardHeader>
                                 <CardTitle>User Management</CardTitle>
                                 <CardDescription>
@@ -548,7 +548,7 @@ function AdminContent() {
 
                     {/* Create Admin Tab */}
                     <TabsContent value="create-admin">
-                        <Card className='text-primary'>
+                        <Card className='bg-white dark:bg-[#1F2F55] text-primary rounded-md'>
                             <CardHeader>
                                 <CardTitle>Create Admin Account</CardTitle>
                                 <CardDescription>
@@ -640,7 +640,7 @@ function AdminContent() {
 
                     {/* Email Logs Tab */}
                     <TabsContent value="email-logs">
-                        <Card className='text-primary'>
+                        <Card className='bg-white dark:bg-[#1F2F55] text-primary rounded-md'>
                             <CardHeader>
                                 <CardTitle>Email Transaction Logs</CardTitle>
                                 <CardDescription>
@@ -664,7 +664,7 @@ function AdminContent() {
 
                     {/* Email Stats Tab */}
                     <TabsContent value="email-stats">
-                        <Card className='text-primary'>
+                        <Card className='bg-white dark:bg-[#1F2F55] text-primary rounded-md'>
                             <CardHeader>
                                 <CardTitle>Email Analytics</CardTitle>
                                 <CardDescription>

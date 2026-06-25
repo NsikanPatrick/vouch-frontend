@@ -60,8 +60,8 @@ export default function LoginPage() {
     };
 
     return (
-        <div className="flex min-h-screen items-center justify-center bg-background p-4">
-            <Card className="w-full max-w-md text-primary">
+        <div className="flex min-h-screen items-center justify-center bg-blue-50 dark:bg-[#0F172B] p-4">
+            <Card className="w-full max-w-md bg-white dark:bg-[#1F2F55] text-primary rounded-md">
                 <CardHeader>
                     <CardTitle className={`text-primary`}>Login</CardTitle>
                     <CardDescription>Welcome back! Please sign in to continue</CardDescription>
@@ -93,7 +93,7 @@ export default function LoginPage() {
                             />
                         </div>
                         <div className="text-right text-sm">
-                            <Link href="/forgot-password" className="text-primary-hover hover:underline">
+                            <Link href="/forgot-password" className="text-secondary hover:underline">
                                 Forgot password?
                             </Link>
                         </div>
@@ -111,7 +111,7 @@ export default function LoginPage() {
                                 <span className="w-full border-t" />
                             </div>
                             <div className="relative flex justify-center text-xs uppercase">
-                                <span className="bg-background px-2 text-muted-foreground">
+                                <span className="bg-popover px-2 text-muted-foreground">
                                     Or continue with
                                 </span>
                             </div>
@@ -143,7 +143,7 @@ export default function LoginPage() {
                 </CardContent>
                 <div className="pb-6 text-center text-sm">
                     Don't have an account?{" "}
-                    <Link href="/signup" className="text-primary-hover hover:underline">
+                    <Link href="/signup" className="text-secondary hover:underline">
                         Sign up
                     </Link>
                 </div>

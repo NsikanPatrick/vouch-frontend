@@ -163,7 +163,7 @@ function ProfileContent() {
     };
 
     return (
-        <div className="min-h-screen bg-background">
+        <div className="min-h-screen bg-blue-50 dark:bg-[#0F172B]">
             <header className="sticky top-0 z-50 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
                 <div className="container mx-auto flex h-16 items-center px-4">
                     <Link href="/dashboard" className="text-xl font-bold text-primary">
@@ -172,8 +172,8 @@ function ProfileContent() {
                 </div>
             </header>
 
-            <main className="container mx-auto flex items-center justify-center p-4">
-                <Card className="w-full max-w-md text-primary">
+            <main className="container mx-auto flex items-center justify-center bg-blue-50 dark:bg-[#0F172B] p-4">
+                <Card className="w-full max-w-md bg-white dark:bg-[#1F2F55] text-primary rounded-md">
                     <CardHeader>
                         <CardTitle>Edit Profile</CardTitle>
                         <CardDescription>Update your account information and profile picture</CardDescription>

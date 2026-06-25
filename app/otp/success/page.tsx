@@ -24,8 +24,8 @@ export default function OtpSuccessPage() {
     }, [router]);
 
     return (
-        <div className="flex min-h-screen items-center justify-center bg-background p-4">
-            <Card className="w-full max-w-md">
+        <div className="flex min-h-screen items-center justify-center bg-blue-50 dark:bg-[#0F172B] p-4">
+            <Card className="w-full max-w-md bg-white dark:bg-[#1F2F55] text-primary rounded-md">
                 <CardHeader>
                     <div className="flex justify-center mb-4">
                         <CheckCircle className="h-16 w-16 text-green-500" />

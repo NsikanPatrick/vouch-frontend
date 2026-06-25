@@ -93,7 +93,7 @@ function ChangePasswordContent() {
             </header>
 
             <main className="container mx-auto flex items-center justify-center p-4">
-                <Card className="w-full max-w-md text-primary">
+                <Card className="w-full max-w-md bg-white dark:bg-[#1F2F55] text-primary rounded-md">
                     <CardHeader>
                         <CardTitle>Change Password</CardTitle>
                         <CardDescription>Update your account password</CardDescription>

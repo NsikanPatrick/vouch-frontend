@@ -72,8 +72,8 @@ export default function OtpRequestPage() {
 
     if (success) {
         return (
-            <div className="flex min-h-screen items-center justify-center bg-background p-4">
-                <Card className="w-full max-w-md">
+            <div className="flex min-h-screen items-center justify-center bg-blue-50 dark:bg-[#0F172B] p-4">
+                <Card className="w-full max-w-md bg-white dark:bg-[#1F2F55] text-primary rounded-md">
                     <CardHeader>
                         <div className="flex justify-center mb-4">
                             <div className="rounded-full bg-green-500/10 p-3">
@@ -110,8 +110,8 @@ export default function OtpRequestPage() {
     }
 
     return (
-        <div className="flex min-h-screen items-center justify-center bg-background p-4">
-            <Card className="w-full max-w-md">
+        <div className="flex min-h-screen items-center justify-center bg-blue-50 dark:bg-[#0F172B] p-4">
+            <Card className="w-full max-w-md bg-white dark:bg-[#1F2F55] text-primary rounded-md">
                 <CardHeader>
                     <div className="flex justify-center mb-4">
                         <div className="rounded-full bg-primary/10 p-3">
@@ -163,7 +163,7 @@ export default function OtpRequestPage() {
                         </Button>
 
                         <div className="text-center text-sm">
-                            <Link href="/login" className="text-primary hover:underline">
+                            <Link href="/login" className="text-secondary hover:underline">
                                 Back to Login
                             </Link>
                         </div>
