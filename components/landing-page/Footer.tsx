@@ -104,7 +104,7 @@ const Footer = () => {
                 {/* Bottom Bar */}
                 <div className="border-t border-slate-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
                     {/* Legal Links */}
-                    <div className="flex flex-wrap gap-4 text-xs">
+                    <div className="flex flex-wrap gap-4 text-sm">
                         {footerData.legal.map((item, index) => (
                             <Link
                                 key={index}
@@ -117,7 +117,7 @@ const Footer = () => {
                     </div>
 
                     {/* Copyright */}
-                    <p className="text-xs text-slate-500">
+                    <p className="text-sm text-slate-500">
                         &copy; {new Date().getFullYear()} Vouch. All rights reserved.
                     </p>
                 </div>
